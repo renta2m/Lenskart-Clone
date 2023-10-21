@@ -1,0 +1,11 @@
+.loginCard {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set an appropriate height for your container */
+  margin: 0 auto;
+  max-width: 400px;
+  max-height: 400px;
+  margin-top: 50px;
+  }
+  
