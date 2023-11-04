@@ -1,8 +1,6 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-*
- 
-{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -10,8 +8,80 @@
 }
 
 body {
-    /* min-height: 100vh; */
+    min-height: 100vh;
     width: 100%;
     background-color: #fff;
     color: #000;
+}
+
+.full-div {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 55px;
+    backdrop-filter: blur(2px);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.div-spacer {
+    flex: 1 1 auto;
+}
+
+.align {
+    display: flex;
+    justify-content: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+a {
+    text-decoration: none;
+}
+
+.height-100 {
+    height: 100%!important;
+}
+/* .bg-img {
+    position: fixed;
+    min-height: 100%;
+    background-image: url(assets/hms.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+} */
+
+.success {
+    position: absolute !important;
+    color: #fff;
+    background-color: green;
+    top: 54px;
+    right: 0px;
+}
+
+.success .mat-simple-snackbar-action {
+    color: #fff;
+}
+
+.error {
+    position: absolute !important;
+    color: #fff;
+    background-color: rgb(231, 4, 4);
+    top: 54px;
+    right: 0px;
+}
+
+.error .mat-simple-snackbar-action {
+    color: #fff;
 }

@@ -1,26 +1,56 @@
-<mat-card class = "loginCard">
-    <mat-card-title>Login</mat-card-title>
-    
-    <mat-card-content>
-        <form [formGroup] = "loginForm" >
-<p>
-    <mat-form-field appearance="fill">
-      <mat-label>Username</mat-label>
-      <input matInput placeholder="Enter Username" formControlName="UserName" required>
-      <mat-error *ngIf="loginForm.get('UserName')?.hasError('required')">User Name is Required</mat-error>
-      
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Enter Password" formControlName="Password" required>
-      <mat-error *ngIf="loginForm.get('Password')?.hasError('required')">Password is Required</mat-error>
-    </mat-form-field>
-  </p>
-  <button mat-raised-button color="primary" (click)="login()">
-    Login</button>
-</form>
+<div class="full-div">
+  <div class="align">
+    <h2 style="margin:50px;">Welcome to Lenskart Portal</h2>
+  </div>
+  <div class="align" *ngIf="!userService.isUserLoggedIn() && user">
+    <mat-card>
+      <mat-card-title>
+        <p class="align">
+          Login
+        </p>
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="loginForm">
+          <div class="column">
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <mat-label>User Name : </mat-label>
+              <input type="text" matInput placeholder="enter the Username" formControlName="userName">
+              <mat-error *ngIf="loginForm.get('userName')?.hasError('required')">
+                Username is <strong>Required</strong>
+              </mat-error>
+            </mat-form-field>
+            <span style="margin:10px"></span>
+            <mat-form-field appearance="outline">
+              <mat-icon matPrefix>lock_outline</mat-icon>
+              <mat-label>Password : </mat-label>
+              <input type="password" matInput placeholder="enter password" formControlName="password">
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is <strong>Required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="invalidDetails">
+              <p class="align">Username or Password is Incorrect</p>
+            </mat-error>
+            <mat-card-subtitle>
+              new user? <a routerLink="/register">register here</a>
+            </mat-card-subtitle>
+            <div class="margin-top-10 row">
+              <div>
+                <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid"
+                  (click)='login()'>LOGIN</button>
+              </div>
+            </div>
 
-</mat-card-content>
-</mat-card>
+          </div>
+        </form>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="align" *ngIf="userService.isUserLoggedIn()">
+    <mat-card>
+      <h2 class="align"> You are already Logged In </h2>
+    </mat-card>
+  </div>
+</div>
