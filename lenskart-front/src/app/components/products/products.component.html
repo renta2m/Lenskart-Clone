@@ -1,0 +1,16 @@
+    <mat-grid-list cols="4" rowHeight="3:1">
+        <ng-container *ngFor="let product of products">
+            <mat-grid-tile>
+                <mat-card class="product-card">
+                    <mat-card-header>
+                        <mat-card-title>{{ product.name }}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="assets/test.jpeg" alt="{{ product.name }}">
+                    <mat-card-content>
+                        <p>{{ product.details }}</p>
+                        <p>Price: {{ product.price | currency }}</p>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </ng-container>
+    </mat-grid-list>

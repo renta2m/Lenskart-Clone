@@ -1,0 +1,53 @@
+<div>
+
+    <div>
+        <!-- <button style="padding: 0px;" mat-button (click)="utilService.back()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button> -->
+        <h3>Products Information</h3>
+    </div>
+    <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="Name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Name">{{product.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Brand">
+            <mat-header-cell *matHeaderCellDef>Brand</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Brand">{{product.brand}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Category">
+            <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Category">{{product.category}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Price">
+            <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Price">{{product.price}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Details">
+            <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Details">{{product.details}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Frame Color">
+            <mat-header-cell *matHeaderCellDef>Frame Color</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Frame Color">{{product.frameColor}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Frame Shape">
+            <mat-header-cell *matHeaderCellDef>Frame Shape</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Frame Shape">{{product.frameShape}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Frame Size">
+            <mat-header-cell *matHeaderCellDef>Frame Size</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Frame Size">{{product.frameSize}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Frame Type">
+            <mat-header-cell *matHeaderCellDef>Frame Type</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="Frame Type">{{product.frameType}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

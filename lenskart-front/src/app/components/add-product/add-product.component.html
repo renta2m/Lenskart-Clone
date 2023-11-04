@@ -1,0 +1,92 @@
+<div class='align'>
+    <mat-card>
+        <mat-card-title>
+            <h4 class="align">
+                Create Product
+            </h4>
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]='productForm'>
+                <div class=column>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Name" type="text" formControlName="name">
+                        <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+                            Name is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Brand</mat-label>
+                        <input matInput placeholder="brand" type="text" formControlName="brand">
+                        <mat-error *ngIf="productForm.get('brand')?.hasError('required')">
+                            Brand is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Category</mat-label>
+                        <input matInput placeholder="Category" type="text" formControlName="category">
+                        <mat-error>
+                            <span *ngIf="productForm.get('category')?.hasError('required')">
+                                Category is <strong>Required</strong>
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Details</mat-label>
+                        <textarea matInput placeholder="Details" type="text" formControlName="details"></textarea>
+                        <mat-error *ngIf="productForm.get('details')?.hasError('required')">
+                            Details are <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Frame Color</mat-label>
+                        <input matInput placeholder="Frame Color" type="text" formControlName="frameColor">
+                        <mat-error *ngIf="productForm.get('frameColor')?.hasError('required')">
+                            Frame Color is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Frame Shape</mat-label>
+                        <input matInput placeholder="Frame Shape" type="text" formControlName="frameShape">
+                        <mat-error *ngIf="productForm.get('frameShape')?.hasError('required')">
+                            Frame Shape is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Frame Size</mat-label>
+                        <input matInput placeholder="Frame Size" type="text" formControlName="frameSize">
+                        <mat-error *ngIf="productForm.get('frameSize')?.hasError('required')">
+                            Frame Size is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Frame Type</mat-label>
+                        <input matInput placeholder="Frame Type" type="text" formControlName="frameType">
+                        <mat-error *ngIf="productForm.get('frameType')?.hasError('required')">
+                            Frame Type is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Price</mat-label>
+                        <input matInput placeholder="price" type="number" formControlName="price">
+                        <mat-error>
+                            <span *ngIf="productForm.get('price')?.hasError('required')">
+                                Price is <strong>Required</strong>
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div><br>
+            </form>
+        </mat-card-content>
+        <mat-card-content>
+            <button mat-raised-button (click)="utilService.back()" color="primary">Back
+            </button>
+            <span style="margin:17px;"></span>
+
+            <button mat-raised-button (click)="saveProduct()" color="primary" [disabled]="productForm.invalid">Save
+                Product
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
