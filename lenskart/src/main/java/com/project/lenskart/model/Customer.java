@@ -43,11 +43,11 @@ public class Customer {
     @Column
     private String phoneNumber;
     @Column
+    private String password;
+    @Column
     private Date createdDate;
     @Column
+    private Boolean active;
+    @Column
     private Date lastUpdatedDate;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 }

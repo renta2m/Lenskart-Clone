@@ -6,7 +6,6 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 import com.project.lenskart.constants.UserRole;
-import com.project.lenskart.repository.UserRepository;
 
 @Converter(autoApply = true)
 public class UserRoleConverter implements AttributeConverter<UserRole, String> {

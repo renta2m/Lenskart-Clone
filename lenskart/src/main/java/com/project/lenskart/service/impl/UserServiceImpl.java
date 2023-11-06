@@ -1,70 +1,50 @@
 package com.project.lenskart.service.impl;
 
-import java.util.Date;
-import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.lenskart.dto.CustomerDTO;
+import com.project.lenskart.constants.UserRole;
 import com.project.lenskart.dto.UserDTO;
 import com.project.lenskart.model.Customer;
-import com.project.lenskart.model.User;
+import com.project.lenskart.model.Employee;
 import com.project.lenskart.repository.CustomerRepository;
-import com.project.lenskart.repository.UserRepository;
+import com.project.lenskart.repository.EmployeeRepository;
 import com.project.lenskart.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepository userRepository;
+    private EmployeeRepository employeeRepository;
     @Autowired
     private CustomerRepository customerRepository;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    public UserDTO login(UserDTO userDTO) throws Exception {
+    public UserDTO customerLogin(UserDTO userDTO) throws Exception {
 
-        User user = this.userRepository.findByUserIdAndPassword(userDTO.getUserId(), userDTO.getPassword());
+        Customer customer = this.customerRepository.findByEmailAndPassword(userDTO.getUserId(), userDTO.getPassword());
 
-        if (user == null) {
-            throw new Exception("user does not exist");
+        if (customer == null) {
+            throw new Exception("customer does not exist");
         }
 
-        return modelMapper.map(user, UserDTO.class);
+        userDTO.setPassword(null);
+        userDTO.setUserRole(UserRole.CUSTOMER);
+        return userDTO;
     }
 
-    @Override
-    public UserDTO save(UserDTO userDTO) {
-        User entity = modelMapper.map(userDTO, User.class);
-        entity = userRepository.save(entity);
+    public UserDTO employeeLogin(UserDTO userDTO) throws Exception {
 
-        return modelMapper.map(entity, UserDTO.class);
-    }
+        Employee employee = this.employeeRepository.findByEmailAndPassword(userDTO.getUserId(), userDTO.getPassword());
 
-    @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        if (customerDTO.getId() == null) {
-            customerDTO.setCreatedDate(new Date());
+        if (employee == null) {
+            throw new Exception("employee does not exist");
         }
 
-        customerDTO.setLastUpdatedDate(new Date());
-        Customer entity = modelMapper.map(customerDTO, Customer.class);
-        entity = customerRepository.save(entity);
-
-        return modelMapper.map(entity, CustomerDTO.class);
-    }
-
-    @Override
-    public CustomerDTO getCustomerById(Integer id) throws Exception {
-        Optional<Customer> customer = customerRepository.findById(id);
-
-        if (!customer.isPresent()) {
-            throw new Exception("Customer not found");
-        }
-
-        return modelMapper.map(customer.get(), CustomerDTO.class);
+        userDTO.setPassword(null);
+        userDTO.setUserRole(employee.getDesignation());
+        return userDTO;
     }
 }

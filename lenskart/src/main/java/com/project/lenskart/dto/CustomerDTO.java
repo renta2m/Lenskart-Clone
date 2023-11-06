@@ -18,6 +18,7 @@ public class CustomerDTO {
     private String email;
     private String zipCode;
     private String phoneNumber;
+    private String password;
     private Date createdDate;
     private Date lastUpdatedDate;
     private UserDTO user;

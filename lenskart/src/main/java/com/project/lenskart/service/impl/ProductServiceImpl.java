@@ -8,12 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.lenskart.dto.CustomerDTO;
 import com.project.lenskart.dto.ProductDTO;
-import com.project.lenskart.dto.UserDTO;
-import com.project.lenskart.model.Customer;
 import com.project.lenskart.model.Product;
-import com.project.lenskart.model.User;
 import com.project.lenskart.repository.ProductRepository;
 import com.project.lenskart.service.ProductService;
 

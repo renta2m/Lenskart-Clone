@@ -1,0 +1,42 @@
+<div>
+    <div>
+        <!-- <button style="padding: 0px;" mat-button (click)="utilService.back()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button> -->
+        <h3>Customers Information</h3>
+    </div>
+    <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="ID">
+            <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell *matCellDef="let customer" data-label="ID">{{customer.id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let customer" data-label="Name">{{customer.firstName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Last Name">
+            <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+            <mat-cell *matCellDef="let customer" data-label="Last Name">{{customer.lastName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Phone Number">
+            <mat-header-cell *matHeaderCellDef>Phone Number</mat-header-cell>
+            <mat-cell *matCellDef="let customer" data-label="Phone Number">{{customer.phoneNumber}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell *matCellDef="let customer" data-label="Email">{{customer.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let customer" data-label="Status">{{customer.active ? 'ACTIVE' : 'INACTIVE'}}</mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+

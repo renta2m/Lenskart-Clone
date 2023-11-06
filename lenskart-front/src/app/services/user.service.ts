@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Customer, User } from '../models/user.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +20,13 @@ export class UserService implements CanActivate {
     if (this.isUserLoggedIn()) {
       return true;
     }
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
     return false;
 
   }
 
-  public login(user: User): Observable<User> {
-    return this.http.post<User>(this.API_URL + 'login', user);
+  public login(user: User, loginType: string): Observable<User> {
+    return this.http.post<User>(this.API_URL + loginType, user);
   }
 
   public isUserLoggedIn() {
@@ -67,15 +67,6 @@ export class UserService implements CanActivate {
   public logOut() {
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('role');
-    this.router.navigate(['/home']);
-  }
-
-  public saveCustomer(customer: Customer): Observable<User> {
-    return this.http.post<User>(this.API_URL + 'customer/create', customer);
-  }
-
-
-  public getCustomerById(id: number): Observable<Customer> {
-    return this.http.get<Customer>(this.API_URL + 'customer/' + id);
+    this.router.navigate(['/login']);
   }
 }

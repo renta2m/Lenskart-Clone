@@ -23,5 +23,7 @@ public class EmployeeDTO {
 
     private String lastUpdatedDate;
 
+    private String password;
+
     private Boolean active;
 }

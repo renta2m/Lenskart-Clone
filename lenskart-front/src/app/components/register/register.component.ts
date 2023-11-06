@@ -2,10 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Customer, User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { Customer } from 'src/app/models/customer.model';
+import { CustomerService } from 'src/app/services/customer.service';
 import { UtilityService } from 'src/app/services/utility.service';
-import { Validator } from 'src/app/services/validator';
 
 @Component({
   selector: 'app-register',
@@ -24,18 +23,15 @@ export class RegisterComponent implements OnInit {
     city: ['', Validators.required],
     state: ['', Validators.required],
     zipCode: ['', Validators.required],
-    createdDate: [new Date() as Date],
     email: ['', [Validators.required, Validators.email]],
     phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
-    password: ['', [Validators.required, Validator.createPasswordStrengthValidator()]],
-    confirmPassword: ['', [Validators.required, Validator.createPasswordStrengthValidator()]]
-  }, {
-    validators:
-      [Validator.passwordValidator()]
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
+    active: [true, Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
-    private userService: UserService, public utilService: UtilityService) { }
+    private userService: CustomerService, public utilService: UtilityService) { }
 
 
   ngOnInit(): void {
@@ -68,15 +64,12 @@ export class RegisterComponent implements OnInit {
     customer.phoneNumber = this.customerForm.get('phoneNumber')?.value?.toString() || '';
     customer.firstName = this.customerForm.get('firstName')?.value || '';
     customer.lastName = this.customerForm.get('lastName')?.value || '';
-    const user: User = { userRole: 'CUSTOMER' };
-    user.userId = this.customerForm.get('email')?.value || '';
-    user.password = this.customerForm.get('password')?.value || '';
+    customer.password = this.customerForm.get('password')?.value || '';
+    customer.active = this.customerForm.get('active')?.value || false;
 
     if (this.customer?.id) {
       customer.id = this.customer?.id;
-      user.id = this.customer?.user?.id;
     }
-    customer.user = user;
 
     //service call to customer api
     this.userService.saveCustomer(customer).subscribe({
@@ -86,7 +79,7 @@ export class RegisterComponent implements OnInit {
         } else {
           this.utilService.success("customer created", "ok");
         }
-        this.router.navigate(['home/login']);
+        this.router.navigate(['login']);
       }),
       error: (err: HttpErrorResponse) => {
         this.utilService.error(err.error.message, 'ok');
@@ -106,10 +99,10 @@ export class RegisterComponent implements OnInit {
     this.customerForm.get('apartmentNo')?.setValue(customer.apartmentNo!);
     this.customerForm.get('phoneNumber')?.setValue(customer.phoneNumber!);
     this.customerForm.get('zipCode')?.setValue(customer.zipCode!);
-    this.customerForm.get('createdDate')?.setValue(customer.createdDate!);
+    this.customerForm.get('active')?.setValue(customer.active!);
 
-    this.customerForm.get('password')?.setValue(customer?.user?.password!);
-    this.customerForm.get('confirmPassword')?.setValue(customer?.user?.password!);
+    this.customerForm.get('password')?.setValue(customer?.password!);
+    this.customerForm.get('confirmPassword')?.setValue(customer?.password!);
 
     this.customerForm?.markAllAsTouched();
   }

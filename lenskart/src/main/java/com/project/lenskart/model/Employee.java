@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.project.lenskart.constants.UserRole;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,8 +29,6 @@ public class Employee {
     @Column
     private String lastName;
     @Column
-    private String Designation;
-    @Column
     private String email;
     @Column
     private String phoneNumber;
@@ -37,8 +37,9 @@ public class Employee {
     @Column
     private String lastUpdatedDate;
     @Column
+    private String password;
+    @Column
     private Boolean active;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @Column
+    private UserRole designation;
 }

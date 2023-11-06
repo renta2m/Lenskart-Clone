@@ -27,6 +27,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import {MatListModule} from '@angular/material/list';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { CustomerListComponent } from './components/customer-list/customer-list.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import {MatListModule} from '@angular/material/list';
     ProductListComponent,
     EmployeeListComponent,
     OrderListComponent,
+    AddEmployeeComponent,
+    CustomerListComponent,
   ],
   imports: [
     BrowserModule,
