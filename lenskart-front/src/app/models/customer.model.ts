@@ -11,6 +11,6 @@ export interface Customer {
     phoneNumber?: string;
     createdDate?: Date;
     lastUpdatedDate?: Date;
-    active?: boolean;
+    activeYN?: string;
     password?: string
 }

@@ -20,10 +20,10 @@ export class AddEmployeeComponent implements OnInit{
     lastName: [''],
     designation: ['EMPLOYEE', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+    phoneNumber: ['', [Validators.required]],
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
-    active: [true, Validators.required],
+    active: ['ACTIVE', Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
@@ -55,17 +55,17 @@ export class AddEmployeeComponent implements OnInit{
     employee.designation = this.employeeForm.get('designation')?.value || '';
     employee.phoneNumber = this.employeeForm.get('phoneNumber')?.value?.toString() || '';
     employee.email = this.employeeForm.get('email')?.value || '';
-    employee.active = this.employeeForm.get('active')?.value || false;
+    employee.activeYN = this.employeeForm.get('active')?.value || "";
     employee.password = this.employeeForm.get('password')?.value || '';
 
-    if (this.employee?.id) {
-      employee.id = this.employee?.id;
+    if (this.employee?.employeeID) {
+      employee.employeeID = this.employee?.employeeID;
     }
 
     //service call to employee api
     this.employeeService.saveEmployee(employee).subscribe({
       next: (() => {
-        if (this.employee?.id) {
+        if (this.employee?.employeeID) {
           this.utilService.success("employee updated", "ok"); 
         } else {
           this.utilService.success("employee created", "ok");
@@ -80,12 +80,12 @@ export class AddEmployeeComponent implements OnInit{
 
   // set the data to form for editing
   updateFormContent(employee: Employee) {
-    this.employeeForm.get('id')?.setValue(employee.id as unknown as string);
+    this.employeeForm.get('id')?.setValue(employee.employeeID as unknown as string);
     this.employeeForm.get('firstName')?.setValue(employee.firstName!);
     this.employeeForm.get('lastName')?.setValue(employee.lastName!);
     this.employeeForm.get('designation')?.setValue(employee.designation!);
     this.employeeForm.get('email')?.setValue(employee.email!);
-    this.employeeForm.get('active')?.setValue(employee.active!);
+    this.employeeForm.get('active')?.setValue(employee.activeYN!);
     this.employeeForm.get('phoneNumber')?.setValue(employee.phoneNumber!);
 
     this.employeeForm.get('password')?.setValue(employee?.password!);

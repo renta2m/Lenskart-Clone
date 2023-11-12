@@ -1,5 +1,5 @@
 export interface Employee {
-    id?: string;
+    employeeID?: string;
     firstName?: string;
     lastName?: string;
     designation?: string;
@@ -8,5 +8,5 @@ export interface Employee {
     password?: string;
     createdDate?: Date;
     lastUpdatedDate?: Date;
-    active?: boolean;
+    activeYN?: string;
 }

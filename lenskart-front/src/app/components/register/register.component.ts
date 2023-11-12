@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
-    active: [true, Validators.required],
+    active: ['ACTIVE', Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     customer.firstName = this.customerForm.get('firstName')?.value || '';
     customer.lastName = this.customerForm.get('lastName')?.value || '';
     customer.password = this.customerForm.get('password')?.value || '';
-    customer.active = this.customerForm.get('active')?.value || false;
+    customer.activeYN = this.customerForm.get('active')?.value || '';
 
     if (this.customer?.id) {
       customer.id = this.customer?.id;
@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
     this.customerForm.get('apartmentNo')?.setValue(customer.apartmentNo!);
     this.customerForm.get('phoneNumber')?.setValue(customer.phoneNumber!);
     this.customerForm.get('zipCode')?.setValue(customer.zipCode!);
-    this.customerForm.get('active')?.setValue(customer.active!);
+    this.customerForm.get('active')?.setValue(customer.activeYN!);
 
     this.customerForm.get('password')?.setValue(customer?.password!);
     this.customerForm.get('confirmPassword')?.setValue(customer?.password!);

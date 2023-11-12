@@ -1,12 +1,12 @@
-<div>
-
+<div class="margin-10">
     <div>
-        <!-- <button style="padding: 0px;" mat-button (click)="utilService.back()">
-                    <mat-icon>arrow_back</mat-icon>
-                </button> -->
-        <h3>Products Information</h3>
+        <h3><strong>PRODUCTS INFORMATION</strong></h3>
     </div>
     <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="ID">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let product" data-label="ID">{{product.id}}</mat-cell>
+        </ng-container>
         <ng-container matColumnDef="Name">
             <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
             <mat-cell *matCellDef="let product" data-label="Name">{{product.name}}</mat-cell>
