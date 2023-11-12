@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.custId = Number(params.get('userId'));
+      this.custId = Number(params.get('custId'));
       // get customer details to edit i.e when user id is present in url
       if (this.custId) {
         this.userService.getCustomerById(this.custId).subscribe({
