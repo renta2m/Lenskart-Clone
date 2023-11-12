@@ -2,7 +2,7 @@
 
     <mat-icon class="icon"></mat-icon>
 
-    <a routerLink="/login">
+    <a routerLink="/home">
         <span style="margin-left: 10px;">LENSKART</span>
     </a>
     <span class="div-spacer"></span>
@@ -44,7 +44,7 @@
         </h3>
     </div>
 </mat-toolbar>
-<div class="full-div">
+<div class="full-div" *ngIf="userService.isAdminLoggedIn() || userService.isEmployeeLoggedIn()">
     <mat-sidenav-container class="row height-100">
         <mat-sidenav mode="side" #sidenav opened>
             <mat-list>

@@ -9,22 +9,23 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
+import { UserService } from './services/user.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: "/products", pathMatch: "full" },
+  { path: '', redirectTo: "/home", pathMatch: "full" },
   { path: 'login', component: HomeComponent },
   { path: 'employee-login', component: HomeComponent },
   { path: 'home', component: ProductsComponent },
   { path:'register', component: RegisterComponent },
-  { path:'add-product', component: AddProductComponent },
-  { path:'add-employee', component: AddEmployeeComponent },
-  { path:'edit-customer/:custId', component: RegisterComponent },
-  { path:'edit-product/:prodId', component: AddProductComponent },
-  { path:'edit-employee/:empId', component: AddEmployeeComponent },
-  { path:'products', component: ProductListComponent },
-  { path:'employees', component: EmployeeListComponent },
-  { path:'customers', component: CustomerListComponent },
-  { path:'orders', component: OrderListComponent }
+  { path:'add-product', component: AddProductComponent, canActivate: [UserService] },
+  { path:'add-employee', component: AddEmployeeComponent, canActivate: [UserService] },
+  { path:'edit-customer/:custId', component: RegisterComponent, canActivate: [UserService] },
+  { path:'edit-product/:prodId', component: AddProductComponent, canActivate: [UserService] },
+  { path:'edit-employee/:empId', component: AddEmployeeComponent, canActivate: [UserService] },
+  { path:'products', component: ProductListComponent, canActivate: [UserService] },
+  { path:'employees', component: EmployeeListComponent, canActivate: [UserService] },
+  { path:'customers', component: CustomerListComponent, canActivate: [UserService] },
+  { path:'orders', component: OrderListComponent, canActivate: [UserService] }
 ];
 
 @NgModule({
