@@ -1,17 +1,18 @@
 package com.project.lenskart.model;
 
 
-import jakarta.persistence.CascadeType;
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import com.project.lenskart.constants.UserRole;
+import com.project.lenskart.constants.Status;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,27 +20,41 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "employee")
+@Table(name = "Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column
+    @Column(name = "EmployeeID")
+    private int employeeID;
+
+    @Column(name = "FirstName")
     private String firstName;
-    @Column
+
+    @Column(name = "Designation")
+    private String designation;
+
+    @Column(name = "LastName")
     private String lastName;
-    @Column
-    private String email;
-    @Column
+
+    @Column(name = "PhoneNumber")
     private String phoneNumber;
-    @Column
-    private String createdDate;
-    @Column
-    private String lastUpdatedDate;
-    @Column
+
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "Password")
     private String password;
-    @Column
-    private Boolean active;
-    @Column
-    private UserRole designation;
+
+    @Column(name = "ActiveYN")
+    private Status activeYN;
+
+    @Column(name = "CreatedDate")
+    private Date createdDate;
+
+    @Column(name = "LastUpdatedDate")
+    private Date lastUpdatedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "WarehouseID")
+    private Warehouse warehouse;
 }

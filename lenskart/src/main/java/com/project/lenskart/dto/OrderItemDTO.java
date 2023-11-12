@@ -11,29 +11,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderItemDTO {
-    private Integer id;
-
-    private Order order;
-
-    private Product product;
-
+    private OrderDTO orders;
+    private ProductDTO product;
     private Double unitPrice;
-
-    private Integer quantity;
-
-    private OrderStatus status;
-
+    private int quantity;
+    private String status;
     private String shipper;
-
     private Date shippingDate;
-
     private String aptNo;
-
     private String streetName;
-
     private String city;
-
     private String state;
-
     private String zipCode;
 }

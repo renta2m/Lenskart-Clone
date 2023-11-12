@@ -11,23 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductDTO {
-    private Integer id;
-
+    private int id;
     private String name;
-
     private String brand;
-
-    private String category;
-
-    private String details;
-
-    private String frameColor;
-
-    private String frameShape;
-
-    private String frameType;
-
-    private String frameSize;
-
     private Double price;
+    private String category;
+    private String details;
+    private String frameColor;
+    private String frameShape;
+    private String frameSize;
+    private String frameType;
+    private WarehouseDTO warehouse;
 }

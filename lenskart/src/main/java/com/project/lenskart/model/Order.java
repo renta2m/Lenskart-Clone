@@ -18,6 +18,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.project.lenskart.constants.Status;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,35 +26,42 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "orders")
+@Table(name = "Orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ID")
+    private int id;
 
-    @Column
-    private Date createdDate;
-
-    @Column
-    private String cardNumber;
-
-    @Column
-    private Integer cvv;
-
-    @Column
-    private String nameOnCard;
+    @Column(name = "OrdersDate")
+    private Date ordersDate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "CustomerID")
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "EmployeeID")
     private Employee employee;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "prescription_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "PrescriptionID")
     private Prescription prescription;
+
+    @Column(name = "CardNumber")
+    private String cardNumber;
+
+    @Column(name = "CVV")
+    private String cvv;
+
+    @Column(name = "ExpiryDate")
+    private Date expiryDate;
+
+    @Column(name = "NameOnCard")
+    private String nameOnCard;
+
+    @Column(name = "ActiveYN")
+    private Status activeYN;
 
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")

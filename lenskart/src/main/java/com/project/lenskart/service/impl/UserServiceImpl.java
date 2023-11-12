@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.lenskart.constants.UserRole;
+import com.project.lenskart.constants.Status;
 import com.project.lenskart.dto.UserDTO;
 import com.project.lenskart.model.Customer;
 import com.project.lenskart.model.Employee;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userDTO.setPassword(null);
-        userDTO.setUserRole(UserRole.CUSTOMER);
+        userDTO.setDesignation("customer");
         return userDTO;
     }
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userDTO.setPassword(null);
-        userDTO.setUserRole(employee.getDesignation());
+        userDTO.setDesignation(employee.getDesignation());
         return userDTO;
     }
 }

@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         } else {
           this.user = response;
           sessionStorage.setItem('user', response.userId!.toString());
-          sessionStorage.setItem('role', response.userRole!);
+          sessionStorage.setItem('role', response.designation!);
           this.navigateToRespectivePath();
         }
       }),
@@ -59,11 +59,11 @@ export class HomeComponent implements OnInit {
   navigateToRespectivePath() {
     const user = Number(sessionStorage.getItem('user') || '');
     const role = sessionStorage.getItem('role');
-    if (role === 'CUSTOMER') {
+    if (role === 'customer') {
       this.router.navigate([`/products`], { relativeTo: this.activatedRoute });
-    } else if (role === 'EMPLOYEE') {
+    } else if (role === 'acoountant') {
       this.router.navigate([`/orders`], { relativeTo: this.activatedRoute });
-    } else if (role === 'ADMIN') {
+    } else if (role === 'manager') {
       this.router.navigate([`/employees`], { relativeTo: this.activatedRoute });
     }
   }

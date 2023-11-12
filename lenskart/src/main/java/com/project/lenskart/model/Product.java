@@ -9,10 +9,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.project.lenskart.dto.ReviewDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,39 +23,45 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
+@Table(name = "Product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ID")
+    private int id;
 
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
 
-    @Column(name = "brand")
+    @Column(name = "Brand")
     private String brand;
 
-
-    @Column(name = "price")
+    @Column(name = "Price")
     private Double price;
 
-    @Column(name = "category")
+    @Column(name = "Category")
     private String category;
 
-    @Column(name = "details")
+    @Column(name = "Details")
     private String details;
 
-    @Column(name = "frame_color")
+    @Column(name = "FrameColor")
     private String frameColor;
 
-    @Column(name = "frame_shape")
+    @Column(name = "FrameShape")
     private String frameShape;
 
-    @Column(name = "frame_type")
+    @Column(name = "FrameSize")
+    private String frameSize;
+
+    @Column(name = "FrameType")
     private String frameType;
 
-    @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product")
+    @ManyToOne
+    @JoinColumn(name = "WarehouseID")
+    private Warehouse warehouse;
+
+    @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 
 }

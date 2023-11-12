@@ -8,12 +8,13 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: "/products", pathMatch: "full" },
   { path: 'login', component: HomeComponent },
   { path: 'employee-login', component: HomeComponent },
-  { path: 'products', component: ProductsComponent },
+  { path: 'home', component: ProductsComponent },
   { path:'register', component: RegisterComponent },
   { path:'add-product', component: AddProductComponent },
   { path:'add-employee', component: AddEmployeeComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path:'edit-employee/:empId', component: AddEmployeeComponent },
   { path:'products', component: ProductListComponent },
   { path:'employees', component: EmployeeListComponent },
-  { path:'customers', component: CustomerListComponent }
+  { path:'customers', component: CustomerListComponent },
+  { path:'orders', component: OrderListComponent }
 ];
 
 @NgModule({

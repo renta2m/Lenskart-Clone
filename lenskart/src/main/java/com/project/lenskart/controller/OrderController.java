@@ -26,10 +26,10 @@ public class OrderController {
 //        return orderService.create(order);
 //    }
 //
-//    @GetMapping("/all")
-//    public List<OrderDTO> getAll() {
-//        return orderService.getAll();
-//    }
+    @GetMapping("/all")
+    public List<OrderDTO> getAll() {
+        return orderService.getAll();
+    }
 //
 //    @GetMapping("/{id}")
 //    public OrderDTO getById(@PathVariable Integer id) {

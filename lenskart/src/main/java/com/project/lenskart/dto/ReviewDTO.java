@@ -2,6 +2,7 @@ package com.project.lenskart.dto;
 
 import java.util.Date;
 
+import com.project.lenskart.constants.Status;
 import com.project.lenskart.model.Customer;
 import com.project.lenskart.model.Product;
 
@@ -11,15 +12,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReviewDTO {
-    private Integer id;
-
-    private String review;
-
-    private Integer rating;
-
-    private Customer customer;
-
-    private Product product;
-
+    private int id;
+    private ProductDTO product;
+    private CustomerDTO customer;
     private Date datePosted;
+    private int rating;
+    private String review;
+    private Status activeYN;
+    private Date lastUpdate;
 }

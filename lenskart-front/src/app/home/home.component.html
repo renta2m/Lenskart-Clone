@@ -32,14 +32,12 @@
             <mat-error *ngIf="invalidDetails">
               <p class="align">Username or Password is Incorrect</p>
             </mat-error>
-            <mat-card-subtitle>
+            <mat-card-subtitle *ngIf="loginType==='cust-login'">
               new user? <a routerLink="/register">register here</a>
             </mat-card-subtitle>
-            <div class="margin-top-10 row">
-              <div>
-                <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid"
-                  (click)='login()'>LOGIN</button>
-              </div>
+            <div class="align">
+              <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid"
+                (click)='login()'>LOGIN</button>
             </div>
 
           </div>

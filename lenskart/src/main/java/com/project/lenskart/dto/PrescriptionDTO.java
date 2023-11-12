@@ -2,25 +2,23 @@ package com.project.lenskart.dto;
 
 import java.util.Date;
 
-import com.project.lenskart.model.Customer;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class PrescriptionDTO {
-    private Integer id;
-    private Customer customer;
-    private Double ODPower;
-    private Double ODCyl;
-    private Double ODBC;
-    private Double ODDia;
-    private Integer ODAxis;
-    private Double OSPower;
-    private Double OSCyl;
-    private Double OSBC;
-    private Double OSDia;
-    private Integer OSAxis;
+    private int id;
+    private CustomerDTO customer;
+    private Double odPower;
+    private Double odCyl;
+    private int odAxis;
+    private Double odBC;
+    private Double odDia;
+    private Double osPower;
+    private Double osCyl;
+    private int osAxis;
+    private Double osBC;
+    private Double osDia;
     private Date createdDate;
 }

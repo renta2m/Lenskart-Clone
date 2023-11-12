@@ -39,7 +39,7 @@ export class UserService implements CanActivate {
 
   public isAdminLoggedIn() {
     let role = sessionStorage.getItem('role')!;
-    if (role && role === 'ADMIN') {
+    if (role && role === 'manager') {
       return true;
     }
 
@@ -48,7 +48,7 @@ export class UserService implements CanActivate {
 
   public isEmployeeLoggedIn() {
     let role = sessionStorage.getItem('role');
-    if (role && role === 'EMPLOYEE') {
+    if (role && role === 'acoountant') {
       return true;
     }
 
@@ -57,7 +57,7 @@ export class UserService implements CanActivate {
 
   public isCustomerLoggedIn() {
     let role = sessionStorage.getItem('role');
-    if (role && role === 'CUSTOMER') {
+    if (role && role === 'customer') {
       return true;
     }
 

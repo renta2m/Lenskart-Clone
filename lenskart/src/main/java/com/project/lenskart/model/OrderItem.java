@@ -1,18 +1,13 @@
 package com.project.lenskart.model;
 
-
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import com.project.lenskart.dto.OrderStatus;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,38 +15,45 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "ordersItem")
+@Table(name = "OrdersItem")
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JoinColumn(name = "OrdersID")
     private Order order;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "ProductID")
     private Product product;
 
-    @Column
+    @Column(name = "UnitPrice")
     private Double unitPrice;
-    @Column
-    private Integer quantity;
-    @Column
-    private OrderStatus status;
-    @Column
+
+    @Column(name = "Quantity")
+    private int quantity;
+
+    @Column(name = "Status")
+    private String status;
+
+    @Column(name = "Shipper")
     private String shipper;
-    @Column
+
+    @Column(name = "ShippingDate")
     private Date shippingDate;
-    @Column
+
+    @Column(name = "AptNo")
     private String aptNo;
-    @Column
+
+    @Column(name = "StreetName")
     private String streetName;
-    @Column
+
+    @Column(name = "City")
     private String city;
-    @Column
+
+    @Column(name = "State")
     private String state;
-    @Column
+
+    @Column(name = "ZipCode")
     private String zipCode;
 }

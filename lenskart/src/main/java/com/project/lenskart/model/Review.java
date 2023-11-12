@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.lenskart.constants.Status;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,27 +21,33 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "review")
+@Table(name = "Reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "review")
-    private String review;
-
-    @Column(name = "rating")
-    private Integer rating;
+    @Column(name = "ID")
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
-
-    @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "ProductID")
     private Product product;
 
-    @Column(name = "datePosted")
+    @ManyToOne
+    @JoinColumn(name = "CustomerID")
+    private Customer customer;
+
+    @Column(name = "DatePosted")
     private Date datePosted;
+
+    @Column(name = "Rating")
+    private int rating;
+
+    @Column(name = "Review")
+    private String review;
+
+    @Column(name = "ActiveYN")
+    private Status activeYN;
+
+    @Column(name = "LastUpdate")
+    private Date lastUpdate;
 }

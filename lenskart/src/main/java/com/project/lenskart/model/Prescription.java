@@ -18,36 +18,47 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "prescription")
+@Table(name = "Prescription")
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ID")
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "CustomerID")
     private Customer customer;
 
-    @Column
-    private Double ODPower;
-    @Column
-    private Double ODCyl;
-    @Column
-    private Double ODBC;
-    @Column
-    private Double ODDia;
-    @Column
-    private Integer ODAxis;
-    @Column
-    private Double OSPower;
-    @Column
-    private Double OSCyl;
-    @Column
-    private Double OSBC;
-    @Column
-    private Double OSDia;
-    @Column
-    private Integer OSAxis;
-    @Column
+    @Column(name = "OD_Power")
+    private Double odPower;
+
+    @Column(name = "OD_Cyl")
+    private Double odCyl;
+
+    @Column(name = "OD_Axis")
+    private int odAxis;
+
+    @Column(name = "OD_BC")
+    private Double odBC;
+
+    @Column(name = "OD_Dia")
+    private Double odDia;
+
+    @Column(name = "OS_Power")
+    private Double osPower;
+
+    @Column(name = "OS_Cyl")
+    private Double osCyl;
+
+    @Column(name = "OS_Axis")
+    private int osAxis;
+
+    @Column(name = "OS_BC")
+    private Double osBC;
+
+    @Column(name = "OS_Dia")
+    private Double osDia;
+
+    @Column(name = "CreatedDate")
     private Date createdDate;
 }

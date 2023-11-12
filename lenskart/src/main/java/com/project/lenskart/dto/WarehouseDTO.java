@@ -1,7 +1,6 @@
 package com.project.lenskart.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import com.project.lenskart.constants.Status;
 
@@ -10,18 +9,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CustomerDTO {
+public class WarehouseDTO {
     private int id;
-    private String firstName;
-    private String lastName;
     private String apartmentNo;
     private String streetName;
     private String city;
     private String state;
-    private String zipCode;
-    private String email;
-    private String password;
-    private String phoneNumber;
+    private String zipcode;
     private Status activeYN;
     private Date createdDate;
     private Date lastUpdatedDate;

@@ -1,16 +1,14 @@
 package com.project.lenskart.model;
 
-
 import java.util.Date;
+import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import com.project.lenskart.constants.Status;
@@ -21,18 +19,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Customer")
-public class Customer {
+@Table(name = "Warehouse")
+public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
-
-    @Column(name = "FirstName")
-    private String firstName;
-
-    @Column(name = "LastName")
-    private String lastName;
 
     @Column(name = "ApartmentNo")
     private String apartmentNo;
@@ -46,17 +38,8 @@ public class Customer {
     @Column(name = "State")
     private String state;
 
-    @Column(name = "ZipCode")
-    private String zipCode;
-
-    @Column(name = "Email")
-    private String email;
-
-    @Column(name = "Password")
-    private String password;
-
-    @Column(name = "PhoneNumber")
-    private String phoneNumber;
+    @Column(name = "Zipcode")
+    private String zipcode;
 
     @Column(name = "ActiveYN")
     private Status activeYN;
@@ -66,4 +49,11 @@ public class Customer {
 
     @Column(name = "LastUpdatedDate")
     private Date lastUpdatedDate;
+
+    @OneToMany(mappedBy = "warehouse")
+    private List<Employee> employees;
+
+    @OneToMany(mappedBy = "warehouse")
+    private List<Product> products;
+
 }

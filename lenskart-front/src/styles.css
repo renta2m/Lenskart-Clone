@@ -61,14 +61,14 @@ a {
 .margin-top-30 {
     margin-top: 30px;
 }
-/* .bg-img {
-    position: fixed;
-    min-height: 100%;
-    background-image: url(assets/hms.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-} */
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
 
 .success {
     position: absolute !important;

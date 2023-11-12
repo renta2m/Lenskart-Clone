@@ -3,7 +3,7 @@
     <mat-icon class="icon"></mat-icon>
 
     <a routerLink="/login">
-        <span style="margin-left: 10px;">Lenskart</span>
+        <span style="margin-left: 10px;">LENSKART</span>
     </a>
     <span class="div-spacer"></span>
     <div class="row">
@@ -44,28 +44,29 @@
         </h3>
     </div>
 </mat-toolbar>
-<div class="full-div" *ngIf="userService.isAdminLoggedIn()">
+<div class="full-div">
     <mat-sidenav-container class="row height-100">
         <mat-sidenav mode="side" #sidenav opened>
             <mat-list>
                 <div>
-                    <mat-list-item>
-                        <a class="" routerLink="products" routerLinkActive="">Products
-                        </a>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item>
-                        <a class="" routerLink="orders" routerLinkActive="">Orders
-                        </a>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item>
+
+                    <mat-list-item *ngIf="userService.isAdminLoggedIn()">
                         <a class="" routerLink="employees" routerLinkActive="">Employees
                         </a>
                     </mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>
+                    <mat-list-item *ngIf="userService.isAdminLoggedIn()">
                         <a class="" routerLink="customers" routerLinkActive="">Customers
+                        </a>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item *ngIf="userService.isAdminLoggedIn()">
+                        <a class="" routerLink="products" routerLinkActive="">Products
+                        </a>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item *ngIf="userService.isAdminLoggedIn() || userService.isEmployeeLoggedIn()">
+                        <a class="" routerLink="orders" routerLinkActive="">Orders
                         </a>
                     </mat-list-item>
                     <mat-divider></mat-divider>
