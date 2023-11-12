@@ -14,11 +14,11 @@ export class UtilityService {
   }
 
   success(message: any, action: any) {
-    this.snackBar.open(message, action, { duration: 2500 , verticalPosition: 'top', panelClass: ['success']}
+    this.snackBar.open(message, action, { duration: 2500 , verticalPosition: 'top', horizontalPosition: 'right'}
     );
   }
 
   public error(message: any, action: any) {
-    this.snackBar.open(message, action,  { duration: 2500 , verticalPosition: 'top', panelClass: ['error']});
+    this.snackBar.open(message, action,  { duration: 2500 , verticalPosition: 'top', horizontalPosition: 'right'});
   }
 }
