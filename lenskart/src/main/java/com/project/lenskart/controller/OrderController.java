@@ -21,20 +21,20 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    @PostMapping("/create")
-//    public OrderDTO create(@RequestBody OrderDTO order) {
-//        return orderService.create(order);
-//    }
-//
+    @PostMapping("/create")
+    public OrderDTO create(@RequestBody OrderDTO order) {
+        return orderService.createOrder(order);
+    }
+
     @GetMapping("/all")
     public List<OrderDTO> getAll() {
         return orderService.getAll();
     }
-//
-//    @GetMapping("/{id}")
-//    public OrderDTO getById(@PathVariable Integer id) {
-//        return orderService.getById(id);
-//    }
+
+    @GetMapping("/{id}")
+    public OrderDTO getById(@PathVariable Integer id) throws Exception {
+        return orderService.getById(id);
+    }
 //
 //    @DeleteMapping("/{id}")
 //    public void deleteById(@PathVariable Integer id) {

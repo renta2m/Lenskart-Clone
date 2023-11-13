@@ -70,6 +70,10 @@ a {
     margin: 10px;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .success {
     position: absolute !important;
     color: #fff;

@@ -1,0 +1,31 @@
+<div class="margin-10">
+    <mat-card>
+        <mat-card-title>
+            <div>
+                <h3>Order Details</h3>
+            </div>
+        </mat-card-title>
+
+        <mat-card-content>
+            <mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let order" data-label="Name">{{order.name}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Date">
+                    <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+                    <mat-cell *matCellDef="let order" data-label="Date">{{order.ordersDate  | date:"MMM dd, yyyy"}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Price">
+                    <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+                    <mat-cell *matCellDef="let order" data-label="Price">{{(order.totalPrice|| 0).toFixed(2) | currency}}</mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </mat-card-content>
+    </mat-card>
+</div>

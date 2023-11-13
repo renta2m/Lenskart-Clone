@@ -10,6 +10,7 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { UserService } from './services/user.service';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: "/home", pathMatch: "full" },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path:'edit-customer/:custId', component: RegisterComponent, canActivate: [UserService] },
   { path:'edit-product/:prodId', component: AddProductComponent, canActivate: [UserService] },
   { path:'edit-employee/:empId', component: AddEmployeeComponent, canActivate: [UserService] },
+  { path:'order-details/:orderId', component: OrderDetailsComponent, canActivate: [UserService] },
   { path:'products', component: ProductListComponent, canActivate: [UserService] },
   { path:'employees', component: EmployeeListComponent, canActivate: [UserService] },
   { path:'customers', component: CustomerListComponent, canActivate: [UserService] },

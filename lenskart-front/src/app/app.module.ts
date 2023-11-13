@@ -29,7 +29,8 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import {MatListModule} from '@angular/material/list';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
-
+import { PrescriptionComponent } from './components/prescription/prescription.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,8 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
     OrderListComponent,
     AddEmployeeComponent,
     CustomerListComponent,
+    PrescriptionComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,

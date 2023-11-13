@@ -16,7 +16,6 @@ export class CustomerListComponent implements OnInit {
 
   constructor(private employeeService: CustomerService, private router: Router) { 
     this.dataSource = new MatTableDataSource([{}]);
-
   }
 
   ngOnInit(): void {
