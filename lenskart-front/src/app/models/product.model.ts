@@ -10,6 +10,7 @@ export interface Product {
     frameSize?: string;
     frameType?: string;
     reviews?: Review[];
+    imagePath?: string;
 }
 
 export interface Review {

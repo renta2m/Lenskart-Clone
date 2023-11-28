@@ -1,16 +1,19 @@
-    <mat-grid-list cols="4" rowHeight="3:1">
-        <ng-container *ngFor="let product of products">
-            <mat-grid-tile>
-                <mat-card class="product-card">
-                    <mat-card-header>
-                        <mat-card-title>{{ product.name }}</mat-card-title>
-                    </mat-card-header>
-                    <!-- <img mat-card-image src="assets/test.jpeg" alt="{{ product.name }}"> -->
-                    <mat-card-content>
-                        <p>{{ product.details }}</p>
-                        <p>Price: {{ product.price | currency }}</p>
-                    </mat-card-content>
-                </mat-card>
-            </mat-grid-tile>
-        </ng-container>
-    </mat-grid-list>
+<mat-grid-list cols="4" rowHeight="250px">
+    <mat-grid-tile *ngFor="let product of products">
+      <mat-card class="product-card">
+        <div *ngIf="product.imagePath">
+          <img mat-card-image class="product-image" [src]="product.imagePath" alt="{{ product.name }}">
+          <mat-card-content>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <p class="product-details">{{ product.details }}</p>
+            <p class="product-price">Price: {{ product.price | currency }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary" (click)="addToCart(product)">Add to Cart</button>
+          </mat-card-actions>
+        </div>
+       
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
