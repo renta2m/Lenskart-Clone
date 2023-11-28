@@ -1,0 +1,43 @@
+<div>
+    <h2 class="align">Your Shopping Cart</h2>
+    <div *ngIf="cartItems.size === 0; else cartItemsList">
+        <p>Your cart is empty.</p>
+    </div>
+    <ng-template #cartItemsList>
+        <mat-card *ngFor="let item of cartItems | keyvalue" class="cart-item">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxFlex="65%">
+                    <img src="assets/test.jpeg" alt="images">
+                    <h4>{{ item.value.product.name }}</h4>
+                    <p>Price: ${{ item.value.product.price }} | Quantity: {{ item.value.quantity }} | Subtotal: ${{
+                        item.value.product.price! * item.value.quantity!}}</p>
+                </div>
+                <div fxFlex="35%" fxLayoutAlign="end center">
+                    <button mat-icon-button color="primary" (click)="decreaseQuantity(item.key)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    {{ item.value.quantity }}
+                    <button mat-icon-button color="primary" (click)="increaseQuantity(item.key)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="removeItem(item.key)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+        <mat-card class="class-item">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxFlex="5%"></div>
+                <div fxFlex="80%" fxLayoutAlign="start center">
+                    <div>Total:</div>
+                </div>
+                <div fxFlex="15%" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center end">
+                    <div>${{ getTotal() }}</div>
+                    <button  mat-flat-button color="primary" (click)="checkout()">Checkout</button>
+                </div>
+                <div fxFlex="5%"></div>
+            </div>
+        </mat-card>
+    </ng-template>
+</div>

@@ -2,9 +2,6 @@ package com.project.lenskart.dto;
 
 import java.util.Date;
 
-import com.project.lenskart.model.Order;
-import com.project.lenskart.model.Product;
-
 import lombok.Getter;
 import lombok.Setter;
 

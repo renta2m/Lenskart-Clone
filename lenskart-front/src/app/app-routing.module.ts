@@ -11,6 +11,7 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { UserService } from './services/user.service';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: "/home", pathMatch: "full" },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path:'products', component: ProductListComponent, canActivate: [UserService] },
   { path:'employees', component: EmployeeListComponent, canActivate: [UserService] },
   { path:'customers', component: CustomerListComponent, canActivate: [UserService] },
-  { path:'orders', component: OrderListComponent, canActivate: [UserService] }
+  { path:'orders', component: OrderListComponent, canActivate: [UserService] },
+  { path:'cart', component: AddToCartComponent },
 ];
 
 @NgModule({

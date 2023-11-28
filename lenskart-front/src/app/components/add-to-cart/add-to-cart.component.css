@@ -1,0 +1,17 @@
+img {
+    width: 20%;
+}
+
+.cart-item {
+    margin-bottom: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+mat-card {
+    margin: 16px;
+}
+
+button {
+    margin-left: 8px;
+}

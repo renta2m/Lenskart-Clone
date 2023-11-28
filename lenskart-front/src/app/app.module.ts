@@ -31,6 +31,9 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { PrescriptionComponent } from './components/prescription/prescription.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     CustomerListComponent,
     PrescriptionComponent,
     OrderDetailsComponent,
+    AddToCartComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     MatGridListModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

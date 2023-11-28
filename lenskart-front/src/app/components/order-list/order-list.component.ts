@@ -18,7 +18,7 @@ export class OrderListComponent {
   dataSource: MatTableDataSource<Order>;
 
   constructor(private orderService: OrderService, private router: Router,
-    private dialog: MatDialog) { 
+    private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource([{}]);
 
   }
@@ -27,7 +27,7 @@ export class OrderListComponent {
       this.orderService.getAllOrders().subscribe({
         next: ((response: Order[]) => {
           this.setOrderDetails(response.filter(order => order.activeYN === 'ACTIVE'));
-          
+
         }),
         error: (err: HttpErrorResponse) => {
           console.log(err.error.message);
@@ -57,7 +57,7 @@ export class OrderListComponent {
       } else if (status === 'shipped') {
         order.status = 'Items have been shipped';
       }
-    })
+    });
     this.dataSource.data = orders;
   }
 

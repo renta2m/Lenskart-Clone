@@ -26,10 +26,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.user = {};
 
-    if (this.userService.isUserLoggedIn()) {
-      this.navigateToRespectivePath();
-    }
-
     if (this.activatedRoute.routeConfig?.path?.includes('employee-login')) {
       this.loginType = 'emp-login';
     }
@@ -60,7 +56,7 @@ export class HomeComponent implements OnInit {
     const user = Number(sessionStorage.getItem('user') || '');
     const role = sessionStorage.getItem('role');
     if (role === 'customer') {
-      this.router.navigate([`/products`], { relativeTo: this.activatedRoute });
+      this.router.navigate([`/home`], { relativeTo: this.activatedRoute });
     } else if (role === 'acoountant') {
       this.router.navigate([`/orders`], { relativeTo: this.activatedRoute });
     } else if (role === 'manager') {
