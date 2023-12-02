@@ -20,10 +20,12 @@ export class OrderDetailsComponent implements OnInit {
   id?: number;
   order?: Order;
   displayedColumns: string[] = ['Date', 'Price', 'Prescription'];
+  itemColumns: string[] = ['Product', 'Quantity', 'Unit Price', 'Status', 'Shipper', 'Shipping Date', 'Actions'];
+  custItemColumns: string[] = ['Product', 'Quantity', 'Unit Price', 'Status', 'Shipper', 'Shipping Date'];
+
   constructor(public utilService: UtilityService, public userService: UserService,
     private route: ActivatedRoute, private orderService: OrderService, private router: Router,
     private dialog: MatDialog) { }
-    itemColumns: string[] = ['Product', 'Quantity', 'Unit Price', 'Status', 'Shipper', 'Shipping Date', 'Actions'];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {

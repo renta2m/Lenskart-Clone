@@ -41,7 +41,7 @@ export class AddToCartComponent implements OnInit{
     for (const item of this.cartItems.values()) {
       total += item.product.price! * item.quantity;
     }
-    return total;
+    return Number(total.toFixed(2));
   }
 
   checkout(): void {

@@ -69,7 +69,7 @@ export class CheckoutComponent implements OnInit {
     this.orderService.saveOrder(order).subscribe({
       next: ((respose: Order) => {
         this.cartService.clearCart();
-        this.router.navigate([`your-orders`]);
+        this.router.navigate([`order-details/${respose.id}`]);
       }),
       error: (err: HttpErrorResponse) => {
         console.log(err.error.message);

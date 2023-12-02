@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.getPrescription().setCreatedDate(new Date());
         orderRepository.save(orderEntity);
 
-        return modelMapper.map(order, OrderDTO.class);
+        return modelMapper.map(orderEntity, OrderDTO.class);
     }
 
     @Override
