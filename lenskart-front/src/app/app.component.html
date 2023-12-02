@@ -14,8 +14,8 @@
                 </button>
             </a>
         </h3>
-        <h3 style="margin-left: 10px;">
-            <a *ngIf="!userService.isUserLoggedIn()" routerLink="/employee-login">
+        <h3 style="margin-left: 10px;"  *ngIf="!userService.isUserLoggedIn()">
+            <a routerLink="/employee-login">
                 <button mat-button>
                     <mat-icon mat-icon-button class="icon">admin_panel_settings</mat-icon><span>Employee Login</span>
                 </button>
@@ -28,24 +28,31 @@
                 </button>
             </a>
         </h3>
-        <h3 style="margin-left: 10px;">
+        <h3 style="margin-left: 10px;" *ngIf="userService.isAdminLoggedIn()">
             <a>
-                <button mat-button (click)='openProductForm()' *ngIf="userService.isAdminLoggedIn()">
+                <button mat-button (click)='openProductForm()' >
                     <mat-icon mat-icon-button class="icon">person_add </mat-icon><span>Add Product</span>
+                </button>
+            </a>
+        </h3>
+        <h3 style="margin-left: 10px;" *ngIf="userService.isCustomerLoggedIn()">
+            <a >
+                <button mat-button (click)="viewProfile()">
+                    <mat-icon mat-icon-button class="icon">person</mat-icon>
+                </button>
+            </a>
+        </h3>
+        <h3 style="margin-left: 10px;" *ngIf="userService.isCustomerLoggedIn()">
+            <a routerLink="/cart">
+                <button mat-button>
+                    <mat-icon mat-icon-button class="icon">shopping_cart</mat-icon>
                 </button>
             </a>
         </h3>
         <h3 style="margin-left: 10px;">
             <a *ngIf="userService.isUserLoggedIn()">
                 <button mat-button (click)="userService.logOut()">
-                    <mat-icon mat-icon-button class="icon">logout</mat-icon><span>Log Out</span>
-                </button>
-            </a>
-        </h3>
-        <h3 style="margin-left: 10px;">
-            <a routerLink="/cart">
-                <button mat-button >
-                    <mat-icon mat-icon-button class="icon">shopping_cart</mat-icon>
+                    <mat-icon mat-icon-button class="icon">logout</mat-icon>
                 </button>
             </a>
         </h3>

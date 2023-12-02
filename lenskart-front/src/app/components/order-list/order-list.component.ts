@@ -68,7 +68,7 @@ export class OrderListComponent {
   viewPrescription(prescription: Prescription): void {
     this.dialog.open(PrescriptionComponent, {
       width: '25%',
-      data: prescription,
+      data: {prescription, edit: false},
     });
   }
 }

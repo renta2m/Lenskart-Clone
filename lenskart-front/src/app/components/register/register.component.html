@@ -1,8 +1,14 @@
 <div class='align'>
     <mat-card>
         <mat-card-title>
-            <h4 class="align">
+            <h4 class="align" *ngIf="path === 'register'">
                 Register New Account
+            </h4>
+            <h4 class="align" *ngIf="path === 'edit-customer'">
+                Edit Custoemr Details
+            </h4>
+            <h4 class="align" *ngIf="path === 'your-profile'">
+                Your Details
             </h4>
         </mat-card-title>
         <mat-card-content>
@@ -113,6 +119,13 @@
                         <mat-error *ngIf="customerForm.hasError('passwordValidator')">
                             Passwords Do not <strong>Match</strong>
                         </mat-error>
+                        <mat-form-field appearance="outline" *ngIf="path === 'edit-customer'">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+                                <mat-option value="ACTIVE">ACTIVE</mat-option>
+                                <mat-option value="INACTIVE">INACTIVE</mat-option>
+                              </mat-select>
+                        </mat-form-field>
                     </div>
                 </div><br>
             </form>

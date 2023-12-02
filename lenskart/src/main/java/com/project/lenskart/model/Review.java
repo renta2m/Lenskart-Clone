@@ -26,7 +26,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ProductID")
@@ -40,7 +40,7 @@ public class Review {
     private Date datePosted;
 
     @Column(name = "Rating")
-    private int rating;
+    private Integer rating;
 
     @Column(name = "Review")
     private String review;

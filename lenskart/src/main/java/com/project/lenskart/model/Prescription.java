@@ -23,7 +23,7 @@ public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "CustomerID")
@@ -36,7 +36,7 @@ public class Prescription {
     private Double odCyl;
 
     @Column(name = "OD_Axis")
-    private int odAxis;
+    private Integer odAxis;
 
     @Column(name = "OD_BC")
     private Double odBC;
@@ -51,7 +51,7 @@ public class Prescription {
     private Double osCyl;
 
     @Column(name = "OS_Axis")
-    private int osAxis;
+    private Integer osAxis;
 
     @Column(name = "OS_BC")
     private Double osBC;

@@ -70,7 +70,7 @@ export class AddEmployeeComponent implements OnInit{
         } else {
           this.utilService.success("employee created", "ok");
         }
-        this.utilService.back();
+        this.utilService.refreshPage(this.router, this.route);
       }),
       error: (err: HttpErrorResponse) => {
         this.utilService.error(err.error.message, 'ok');

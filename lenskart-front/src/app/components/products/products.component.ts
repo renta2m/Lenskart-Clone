@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Order, OrderItem } from 'src/app/models/order.model';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
@@ -22,7 +23,7 @@ export class ProductsComponent implements OnInit {
     }
   ];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((products) => {
@@ -39,6 +40,11 @@ export class ProductsComponent implements OnInit {
     });
   }
   buyNow(product: Product) {
+    let cartItems: Map<number, {product: Product, quantity: number}> = new Map();
+    cartItems.set(product.id!, {product, quantity:1});
+
+    localStorage.setItem('cartItems', JSON.stringify([...cartItems]));
+    this.router.navigate(["/cart"]);
 
   }
 

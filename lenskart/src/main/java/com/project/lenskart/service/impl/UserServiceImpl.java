@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
         userDTO.setPassword(null);
         userDTO.setDesignation("customer");
+        userDTO.setId(customer.getId());
         return userDTO;
     }
 
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
         userDTO.setPassword(null);
         userDTO.setDesignation(employee.getDesignation());
+        userDTO.setId(employee.getEmployeeID());
         return userDTO;
     }
 }

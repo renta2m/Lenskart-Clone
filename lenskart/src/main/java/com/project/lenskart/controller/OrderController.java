@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.lenskart.dto.OrderDTO;
+import com.project.lenskart.dto.OrderItemDTO;
 import com.project.lenskart.service.OrderService;
 
 @RestController
@@ -35,9 +36,9 @@ public class OrderController {
     public OrderDTO getById(@PathVariable Integer id) throws Exception {
         return orderService.getById(id);
     }
-//
-//    @DeleteMapping("/{id}")
-//    public void deleteById(@PathVariable Integer id) {
-//        orderService.deleteById(id);
-//    }
+
+    @PostMapping("/update-status")
+    public void updateStatus(@RequestBody OrderItemDTO orderItemDTO) throws Exception {
+        orderService.updateOrderItem(orderItemDTO);
+    }
 }

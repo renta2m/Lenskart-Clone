@@ -20,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ProductsComponent } from './components/products/products.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RegisterComponent } from './components/register/register.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -34,6 +34,9 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CartService } from './services/cart.service';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AddressComponent } from './components/address/address.component';
+import { ShipmentDetailsComponent } from './components/shipment-details/shipment-details.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { CartService } from './services/cart.service';
     PrescriptionComponent,
     OrderDetailsComponent,
     AddToCartComponent,
+    CheckoutComponent,
+    AddressComponent,
+    ShipmentDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,7 @@ import { CartService } from './services/cart.service';
     MatListModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

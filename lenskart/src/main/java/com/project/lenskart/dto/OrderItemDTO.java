@@ -8,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderItemDTO {
-    private OrderDTO orders;
+    private Integer orderId;
     private ProductDTO product;
     private Double unitPrice;
-    private int quantity;
+    private Integer quantity;
     private String status;
     private String shipper;
     private Date shippingDate;

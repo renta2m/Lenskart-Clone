@@ -77,8 +77,7 @@ a {
 .pointer {
     cursor: pointer;
 }
-
-.success {
+.style-success {
     position: absolute !important;
     color: #fff;
     background-color: green;
@@ -86,11 +85,11 @@ a {
     right: 0px;
 }
 
-.success .mat-simple-snackbar-action {
+.style-success .mat-simple-snackbar-action {
     color: #fff;
 }
 
-.error {
+.style-error {
     position: absolute !important;
     color: #fff;
     background-color: rgb(231, 4, 4);
@@ -98,6 +97,14 @@ a {
     right: 0px;
 }
 
-.error .mat-simple-snackbar-action {
+.style-error .mat-simple-snackbar-action {
     color: #fff;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-left-10 {    
+    margin-right: 10px;
 }

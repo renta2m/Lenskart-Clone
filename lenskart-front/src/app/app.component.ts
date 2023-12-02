@@ -24,4 +24,9 @@ export class AppComponent implements OnInit {
   openProductForm(): void {
     this.router.navigate(['add-product']);
   }
+
+  viewProfile(): void {
+    const custId = Number(localStorage.getItem('id'));
+    this.router.navigate([`your-profile/${custId}`]);
+  }
 }

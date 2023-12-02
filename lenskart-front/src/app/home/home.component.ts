@@ -41,8 +41,9 @@ export class HomeComponent implements OnInit {
           this.invalidDetails = true;
         } else {
           this.user = response;
-          sessionStorage.setItem('user', response.userId!.toString());
-          sessionStorage.setItem('role', response.designation!);
+          localStorage.setItem('user', response.userId!.toString());
+          localStorage.setItem('role', response.designation!);
+          localStorage.setItem('id', response.id!.toString());
           this.navigateToRespectivePath();
         }
       }),
@@ -53,8 +54,8 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToRespectivePath() {
-    const user = Number(sessionStorage.getItem('user') || '');
-    const role = sessionStorage.getItem('role');
+    const user = Number(localStorage.getItem('user') || '');
+    const role = localStorage.getItem('role');
     if (role === 'customer') {
       this.router.navigate([`/home`], { relativeTo: this.activatedRoute });
     } else if (role === 'acoountant') {

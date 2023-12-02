@@ -30,7 +30,7 @@ export class UserService implements CanActivate {
   }
 
   public isUserLoggedIn() {
-    let user = sessionStorage.getItem('user');
+    let user = localStorage.getItem('user');
     if ((user !== null)) {
       return true;
     }
@@ -38,7 +38,7 @@ export class UserService implements CanActivate {
   }
 
   public isAdminLoggedIn() {
-    let role = sessionStorage.getItem('role')!;
+    let role = localStorage.getItem('role')!;
     if (role && role === 'manager') {
       return true;
     }
@@ -47,7 +47,7 @@ export class UserService implements CanActivate {
   }
 
   public isEmployeeLoggedIn() {
-    let role = sessionStorage.getItem('role');
+    let role = localStorage.getItem('role');
     if (role && role === 'acoountant') {
       return true;
     }
@@ -56,7 +56,7 @@ export class UserService implements CanActivate {
   }
 
   public isCustomerLoggedIn() {
-    let role = sessionStorage.getItem('role');
+    let role = localStorage.getItem('role');
     if (role && role === 'customer') {
       return true;
     }
@@ -65,8 +65,7 @@ export class UserService implements CanActivate {
   }
 
   public logOut() {
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('role');
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

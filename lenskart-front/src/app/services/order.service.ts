@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Order } from '../models/order.model';
+import { Order, OrderItem } from '../models/order.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -22,4 +22,8 @@ export class OrderService {
   public saveOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.API_URL + 'create', order);
   }
-}
+
+  public updateStatus(item: OrderItem): Observable<void> {
+    return this.http.post<void>(this.API_URL + 'update-status', item);
+  }
+ }

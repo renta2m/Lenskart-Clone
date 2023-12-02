@@ -12,6 +12,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { UserService } from './services/user.service';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: "/home", pathMatch: "full" },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path:'add-product', component: AddProductComponent, canActivate: [UserService] },
   { path:'add-employee', component: AddEmployeeComponent, canActivate: [UserService] },
   { path:'edit-customer/:custId', component: RegisterComponent, canActivate: [UserService] },
+  { path:'your-profile/:custId', component: RegisterComponent, canActivate: [UserService] },
   { path:'edit-product/:prodId', component: AddProductComponent, canActivate: [UserService] },
   { path:'edit-employee/:empId', component: AddEmployeeComponent, canActivate: [UserService] },
   { path:'order-details/:orderId', component: OrderDetailsComponent, canActivate: [UserService] },
@@ -30,6 +32,7 @@ const routes: Routes = [
   { path:'customers', component: CustomerListComponent, canActivate: [UserService] },
   { path:'orders', component: OrderListComponent, canActivate: [UserService] },
   { path:'cart', component: AddToCartComponent },
+  { path:'checkout', component: CheckoutComponent, canActivate: [UserService]}
 ];
 
 @NgModule({

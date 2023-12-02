@@ -1,4 +1,4 @@
-<mat-list>
+<mat-list *ngIf="!edit">
     <mat-list-item class="section-heading"><strong>PRESCRIPTION DETAILS</strong></mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>odPower: {{prescription?.odPower}}</mat-list-item>
@@ -21,3 +21,147 @@
     <mat-divider></mat-divider>
     <mat-list-item>osDia: {{prescription?.osDia}}</mat-list-item>
 </mat-list>
+
+<div class='align' *ngIf="edit">
+    <mat-card>
+        <mat-card-content>
+            <mat-card-title>
+                <h4 class="align">
+                    Prescription Details
+                </h4>
+            </mat-card-title>
+            <form [formGroup]='prescriptionForm'>
+                <div class="row">
+                    <div class=column>
+                        <div class=column>
+                            <label>Od Power</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Od Power</mat-label>
+                                <input type="number" matInput placeholder="OD Power" formControlName="odPower" required>
+                                <mat-error *ngIf="prescriptionForm.get('odPower')?.hasError('required')">
+                                    Od Power is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class=column>
+                            <label>Od Cylinder</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Od Cylinder</mat-label>
+                                <input matInput type="number" placeholder="OD Cylinder" formControlName="odCyl"
+                                    required>
+                                <mat-error *ngIf="prescriptionForm.get('odCyl')?.hasError('required')">
+                                    Od Cylinder is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Od Axis</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Od Axis</mat-label>
+                                <input matInput type="number" placeholder="OD Axis" formControlName="odAxis" required>
+                                <mat-error *ngIf="prescriptionForm.get('odAxis')?.hasError('required')">
+                                    Od Axis is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Od BC</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Od BC</mat-label>
+                                <input matInput type="number" placeholder="OD BC" formControlName="odBC" required>
+                                <mat-error *ngIf="prescriptionForm.get('odBC')?.hasError('required')">
+                                    Od BC is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Od Diameter</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Od Diameter</mat-label>
+                                <input matInput type="number" placeholder="OD Diameter" formControlName="odDia"
+                                    required>
+                                <mat-error *ngIf="prescriptionForm.get('odDia')?.hasError('required')">
+                                    Od Diameter is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="column margin-left-30">
+                        <div class=column>
+                            <label>Os Power</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Os Power</mat-label>
+                                <input matInput type="number" placeholder="OS Power" formControlName="osPower" required>
+                                <mat-error *ngIf="prescriptionForm.get('osPower')?.hasError('required')">
+                                    Os Power is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Os Cylinder</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Os Cylinder</mat-label>
+                                <input matInput type="number" placeholder="OS Cylinder" formControlName="osCyl"
+                                    required>
+                                <mat-error *ngIf="prescriptionForm.get('osCyl')?.hasError('required')">
+                                    Os Cylinder is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Os Axis</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Os Axis</mat-label>
+                                <input matInput type="number" placeholder="OS Axis" formControlName="osAxis" required>
+                                <mat-error *ngIf="prescriptionForm.get('osAxis')?.hasError('required')">
+                                    Os Axis is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Os BC</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Os BC</mat-label>
+                                <input matInput type="number" placeholder="OS BC" formControlName="osBC" required>
+                                <mat-error *ngIf="prescriptionForm.get('osBC')?.hasError('required')">
+                                    Os BC is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class=column>
+                            <label>Os Diameter</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Os Diameter</mat-label>
+                                <input matInput type="number" placeholder="OS Diameter" formControlName="osDia"
+                                    required>
+                                <mat-error *ngIf="prescriptionForm.get('osDia')?.hasError('required')">
+                                    Os Diameter is <strong>Required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div><br>
+            </form>
+        </mat-card-content>
+        <mat-card-content>
+            <div class="align">
+                <button mat-raised-button (click)="onNoClick()" color="primary">Close
+                </button>
+                <span style="margin:17px;"></span>
+                <div class="row">
+                    <button mat-raised-button color="primary" (click)="add()" [disabled]="prescriptionForm.invalid">Add
+                        Prescription
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

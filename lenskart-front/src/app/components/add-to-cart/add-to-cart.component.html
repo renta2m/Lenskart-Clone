@@ -6,11 +6,14 @@
     <ng-template #cartItemsList>
         <mat-card *ngFor="let item of cartItems | keyvalue" class="cart-item">
             <div fxLayout="row" fxLayoutAlign="space-between">
-                <div fxFlex="65%">
-                    <img src="assets/test.jpeg" alt="images">
-                    <h4>{{ item.value.product.name }}</h4>
-                    <p>Price: ${{ item.value.product.price }} | Quantity: {{ item.value.quantity }} | Subtotal: ${{
-                        item.value.product.price! * item.value.quantity!}}</p>
+                <div fxFlex="65%" fxLayout="row" fxLayoutGap="40px">
+                    <img src="{{item.value.product.imagePath}}" alt="images">
+                    <div>
+                        <h3><strong>{{ item.value.product.name }}</strong></h3>
+                        <p>Price: ${{ item.value.product.price }} <br> Quantity: {{ item.value.quantity }} <br>
+                            Subtotal: ${{
+                            item.value.product.price! * item.value.quantity!}}</p>
+                    </div>
                 </div>
                 <div fxFlex="35%" fxLayoutAlign="end center">
                     <button mat-icon-button color="primary" (click)="decreaseQuantity(item.key)">
@@ -27,17 +30,18 @@
             </div>
         </mat-card>
         <mat-card class="class-item">
-            <div fxLayout="row" fxLayoutAlign="space-between">
-                <div fxFlex="5%"></div>
-                <div fxFlex="80%" fxLayoutAlign="start center">
-                    <div>Total:</div>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <div fxFlex="5%"></div>
+                    <div fxFlex="80%" fxLayoutAlign="start center">
+                        <h2><strong>TOTAL:</strong></h2>
+                    </div>
+                    <div fxFlex="20%" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+                        <strong>${{ getTotal() }}</strong>
+                        <button mat-flat-button color="primary" (click)="checkout()">Checkout</button>
+                    </div>
                 </div>
-                <div fxFlex="15%" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center end">
-                    <div>${{ getTotal() }}</div>
-                    <button  mat-flat-button color="primary" (click)="checkout()">Checkout</button>
-                </div>
-                <div fxFlex="5%"></div>
-            </div>
+            </mat-card-content>
         </mat-card>
     </ng-template>
 </div>

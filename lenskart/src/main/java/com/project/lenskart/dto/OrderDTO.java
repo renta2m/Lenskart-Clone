@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderDTO {
-    private int id;
+    private Integer id;
     private Date ordersDate;
     private CustomerDTO customer;
     private EmployeeDTO employee;

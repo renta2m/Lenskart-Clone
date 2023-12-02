@@ -12,11 +12,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReviewDTO {
-    private int id;
+    private Integer id;
     private ProductDTO product;
     private CustomerDTO customer;
     private Date datePosted;
-    private int rating;
+    private Integer rating;
     private String review;
     private Status activeYN;
     private Date lastUpdate;

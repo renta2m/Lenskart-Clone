@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class WarehouseDTO {
-    private int id;
+    private Integer id;
     private String apartmentNo;
     private String streetName;
     private String city;

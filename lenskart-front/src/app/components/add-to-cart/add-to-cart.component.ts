@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -11,7 +13,8 @@ import { CartService } from 'src/app/services/cart.service';
 export class AddToCartComponent implements OnInit{
   cartItems: Map<number, { product: Product, quantity: number }> = new Map();
   
-  constructor(private cartService: CartService,  private router: Router) { }
+  constructor(private cartService: CartService, private router: Router, private userService: UserService,
+    private utils: UtilityService) { }
   
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
@@ -42,6 +45,10 @@ export class AddToCartComponent implements OnInit{
   }
 
   checkout(): void {
+    if (this.userService.isCustomerLoggedIn()) {
     this.router.navigate(['/checkout']);
+    } else {
+      this.utils.error('you should login/sign up to order','ok');
+    }
   }
 }

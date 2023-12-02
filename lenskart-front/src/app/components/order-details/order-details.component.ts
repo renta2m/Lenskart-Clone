@@ -1,9 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Order } from 'src/app/models/order.model';
+import { Order, OrderItem } from 'src/app/models/order.model';
+import { Prescription } from 'src/app/models/prescription.model';
 import { OrderService } from 'src/app/services/order.service';
+import { UserService } from 'src/app/services/user.service';
 import { UtilityService } from 'src/app/services/utility.service';
+import { PrescriptionComponent } from '../prescription/prescription.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order-details',
@@ -11,12 +15,15 @@ import { UtilityService } from 'src/app/services/utility.service';
   styleUrls: ['./order-details.component.css']
 })
 export class OrderDetailsComponent implements OnInit {
-  dataSource?: any
+  dataSource?: any;
+  itemsDataSource?: any;
   id?: number;
   order?: Order;
-  displayedColumns: string[] = ['Name', 'Date', 'Price'];
-  constructor(public utilService: UtilityService,
-    private route: ActivatedRoute, private orderService: OrderService, private router: Router) { }
+  displayedColumns: string[] = ['Date', 'Price', 'Prescription'];
+  constructor(public utilService: UtilityService, public userService: UserService,
+    private route: ActivatedRoute, private orderService: OrderService, private router: Router,
+    private dialog: MatDialog) { }
+    itemColumns: string[] = ['Product', 'Quantity', 'Unit Price', 'Status', 'Shipper', 'Shipping Date', 'Actions'];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -58,6 +65,26 @@ export class OrderDetailsComponent implements OnInit {
     }  
     this.order = order;
     this.dataSource = [this.order];  
+    this.itemsDataSource = this.order?.orderItems;
   }
 
+  viewPrescription(prescription: Prescription): void {
+    this.dialog.open(PrescriptionComponent, {
+      width: '25%',
+      data: {prescription, edit: false},
+    });
+  }
+
+  updateOrder(item: OrderItem, status: string) {
+    item.status = status;
+    item.orderId = this.order?.id;
+    this.orderService.updateStatus(item).subscribe({
+      next: ((response: void) => {
+        this.utilService.refreshPage(this.router, this.route);
+      }),
+      error: (err: HttpErrorResponse) => {
+        this.utilService.error(err.error.message, 'ok');
+      }
+    });
+  }
 }

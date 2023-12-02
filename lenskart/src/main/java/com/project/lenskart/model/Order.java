@@ -31,7 +31,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "OrdersDate")
     private Date ordersDate;
@@ -44,7 +44,7 @@ public class Order {
     @JoinColumn(name = "EmployeeID")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PrescriptionID")
     private Prescription prescription;
 
@@ -63,7 +63,6 @@ public class Order {
     @Column(name = "ActiveYN")
     private Status activeYN;
 
-    @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "orders")
     private List<OrderItem> orderItems;
 }

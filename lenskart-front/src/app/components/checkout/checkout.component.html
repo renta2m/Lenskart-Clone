@@ -1,0 +1,194 @@
+<mat-card>
+    <mat-card-content>
+        <div class="margin-top-30 align">
+            <h1><strong>CHECKOUT</strong></h1>
+        </div>
+        <div class='align'>
+            <div>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-list>
+                            <div class="row">
+                                <mat-list-item class="section-heading"><strong>PRESCRIPTION
+                                        DETAILS</strong></mat-list-item>
+                                <button *ngIf="!prescription" mat-raised-button class="margin-top-10" color="primary"
+                                    (click)="openPrescription()">Add Prescription</button>
+                                <button *ngIf="prescription" mat-raised-button class="margin-top-10" color="primary"
+                                    (click)="openPrescription()">Edit Prescription</button>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div *ngIf="prescription">
+                                <div class="row">
+                                    <mat-list-item>odPower: {{prescription.odPower}}</mat-list-item>
+                                    <mat-list-item>odCyl: {{prescription.odCyl}}</mat-list-item>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <div class="row">
+                                    <mat-list-item>odAxis : {{prescription.odAxis}}</mat-list-item>
+                                    <mat-list-item>odBC: {{prescription.odBC}}</mat-list-item>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <div class="row">
+                                    <mat-list-item>odDia: {{prescription.odDia}}</mat-list-item>
+                                    <mat-list-item>osPower: {{prescription.osPower}}</mat-list-item>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <div class="row">
+                                    <mat-list-item>osCyl: {{prescription.osCyl}}</mat-list-item>
+                                    <mat-list-item>osAxis: {{prescription.osAxis}}</mat-list-item>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <div class="row">
+                                    <mat-list-item>osBC: {{prescription.osBC}}</mat-list-item>
+                                    <mat-list-item>osDia: {{prescription.osDia}}</mat-list-item>
+                                </div>
+                            </div>
+
+                        </mat-list>
+                        <div *ngIf="!prescription">
+                            Add Prescription to Complete Payment
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Payment Information</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-card-title>
+                            <h4 class="align"> Card Details </h4>
+                        </mat-card-title>
+                        <form [formGroup]="paymentForm">
+                            <div fxLayout="column" fxLayoutGap="20px">
+                                <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Name On Card</mat-label>
+                                        <input matInput placeholder="Name on card" formControlName="nameOnCard"
+                                            required>
+                                        <mat-error *ngIf="paymentForm.get('nameOnCard')?.hasError('required')">
+                                            Name is <strong>Required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Card Number</mat-label>
+                                        <input type="text" matInput placeholder="Card Number"
+                                            formControlName="cardNumber" required>
+                                        <mat-error>
+                                            <span *ngIf="paymentForm.get('cardNumber')?.hasError('required')">
+                                                Card Number is <strong>Required</strong>
+                                            </span>
+                                            <span
+                                                *ngIf="!paymentForm.get('cardNumber')?.hasError('pattern') && paymentForm.get('cardNumber')?.hasError('minlength')">
+                                                Card Number should be of <strong>16 digits</strong>
+                                            </span>
+                                            <span
+                                                *ngIf="!paymentForm.get('cardNumber')?.hasError('pattern') && paymentForm.get('cardNumber')?.hasError('maxlength')">
+                                                Card Number should be of <strong>16 digits</strong>
+                                            </span>
+                                            <span *ngIf="paymentForm.get('cardNumber')?.hasError('pattern')">
+                                                Card Number should be of type <strong>Number</strong>
+                                            </span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>CVV</mat-label> <input matInput type="password"
+                                            placeholder="CVV (Enter 3 digits)" formControlName="cvv" required>
+                                        <mat-error>
+                                            <span *ngIf="paymentForm.get('cvv')?.hasError('required')">
+                                                CVV is <strong>Required</strong>
+                                            </span>
+                                            <span
+                                                *ngIf="paymentForm.get('cvv')?.hasError('minlength') || paymentForm.get('cvv')?.hasError('maxlength')">
+                                                CVV should be of <strong>3 digits</strong>
+                                            </span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Expiry month/year</mat-label> <input matInput placeholder="MM/YY"
+                                            formControlName="expiry" required>
+                                        <mat-error>
+                                            <span *ngIf="paymentForm.get('expiry')?.hasError('required')">
+                                                Expiry month/year <strong>Required</strong>
+                                            </span>
+                                            <span *ngIf="paymentForm.get('expiry')?.hasError('pattern')">
+                                                expiry should be in <strong>mm/yy</strong> (month/year) format and
+                                                should be
+                                                a
+                                                valid date
+                                            </span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+
+                                <div class="row" style="margin:10px">
+                                    <button mat-raised-button class="margin-top-10" color="primary"
+                                        (click)="placeOrder()" [disabled]="paymentForm.invalid && prescription">Complete
+                                        Payment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-list>
+                            <div class="row">
+                                <mat-list-item class="section-heading"><strong>ADDRESS DETAILS</strong></mat-list-item>
+                                <button *ngIf="!address" mat-raised-button class="margin-top-10" color="primary"
+                                    (click)="openAddress()">Add Address</button>
+                                <button *ngIf="address" mat-raised-button class="margin-top-10" color="primary"
+                                    (click)="openAddress()">Edit Address</button>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div *ngIf="address">
+                                <!-- <div class="row"> -->
+                                <mat-list-item>Apt No: {{address.aptNo}}</mat-list-item>
+                                <mat-divider></mat-divider>
+                                <mat-list-item>Street Name: {{address.streetName}}</mat-list-item>
+                                <!-- </div> -->
+                                <mat-divider></mat-divider>
+                                <!-- <div class="row"> -->
+                                <mat-list-item>City : {{address.city}}</mat-list-item>
+                                <mat-divider></mat-divider>
+                                <mat-list-item>State: {{address.state}}</mat-list-item>
+                                <!-- </div> -->
+                                <mat-divider></mat-divider>
+                                <!-- <div class="row"> -->
+                                <mat-list-item>Zip Code: {{address.zipCode}}</mat-list-item>
+                                <!-- </div> -->
+                            </div>
+
+                        </mat-list>
+                        <div *ngIf="!address">
+                            Add Address to Complete Payment
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Order Summary</mat-card-title>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <div *ngIf="orderItems && orderItems!.length > 0" class="margin-left-30">
+                            <ul>
+                                <li *ngFor="let item of orderItems" style="font-size: 18px;padding: 15px;margin:10px;">
+                                    {{ item?.product?.name }} - {{ item?.quantity }} x {{ item?.unitPrice | currency }}
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 style="font-size: 20px;padding: 5px;margin: 5px;"><strong>Total Price: {{ totalPrice |
+                                currency
+                                }}</strong></h3>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

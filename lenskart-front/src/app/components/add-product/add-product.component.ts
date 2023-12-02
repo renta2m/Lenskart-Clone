@@ -78,6 +78,7 @@ export class AddProductComponent implements OnInit {
         } else {
           this.utilService.success("product created", "ok");
         }
+        this.utilService.refreshPage(this.router, this.route);
       }),
       error: (err: HttpErrorResponse) => {
         this.utilService.error(err.error.message, 'ok');

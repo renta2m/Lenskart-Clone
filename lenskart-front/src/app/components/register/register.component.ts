@@ -14,6 +14,7 @@ import { UtilityService } from 'src/app/services/utility.service';
 export class RegisterComponent implements OnInit {
   custId?: number;
   customer?: Customer;
+  path = '';
   customerForm = this.formBuilder.group({
     id: [''],
     firstName: ['', Validators.required],
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
     phoneNumber: ['', [Validators.required]],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
-    active: ['ACTIVE', Validators.required],
+    status: ['ACTIVE', Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
@@ -50,6 +51,7 @@ export class RegisterComponent implements OnInit {
         });
       }
     });
+    this.path = this.route.snapshot.url[0].path;
   }
 
   // save customer details from form
@@ -65,7 +67,7 @@ export class RegisterComponent implements OnInit {
     customer.firstName = this.customerForm.get('firstName')?.value || '';
     customer.lastName = this.customerForm.get('lastName')?.value || '';
     customer.password = this.customerForm.get('password')?.value || '';
-    customer.activeYN = this.customerForm.get('active')?.value || '';
+    customer.activeYN = this.customerForm.get('status')?.value || '';
 
     if (this.customer?.id) {
       customer.id = this.customer?.id;
@@ -75,11 +77,11 @@ export class RegisterComponent implements OnInit {
     this.userService.saveCustomer(customer).subscribe({
       next: (() => {
         if (this.customer?.id) {
-          this.utilService.success("customer updated", "ok"); 
+          this.utilService.success("details updated", "ok"); 
         } else {
-          this.utilService.success("customer created", "ok");
+          this.utilService.success("account created", "ok");
         }
-        this.router.navigate(['login']);
+        this.utilService.refreshPage(this.router, this.route);
       }),
       error: (err: HttpErrorResponse) => {
         this.utilService.error(err.error.message, 'ok');
@@ -87,7 +89,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // set the data to form for editing
   updateFormContent(customer: Customer) {
     this.customerForm.get('id')?.setValue(customer.id as unknown as string);
     this.customerForm.get('firstName')?.setValue(customer.firstName!);
@@ -99,7 +100,7 @@ export class RegisterComponent implements OnInit {
     this.customerForm.get('apartmentNo')?.setValue(customer.apartmentNo!);
     this.customerForm.get('phoneNumber')?.setValue(customer.phoneNumber!);
     this.customerForm.get('zipCode')?.setValue(customer.zipCode!);
-    this.customerForm.get('active')?.setValue(customer.activeYN!);
+    this.customerForm.get('status')?.setValue(customer.activeYN!);
 
     this.customerForm.get('password')?.setValue(customer?.password!);
     this.customerForm.get('confirmPassword')?.setValue(customer?.password!);

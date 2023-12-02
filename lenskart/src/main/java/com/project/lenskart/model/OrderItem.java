@@ -5,9 +5,13 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,11 +20,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "OrdersItem")
+@IdClass(OrderItemPkId.class)
 public class OrderItem {
     @Id
     @ManyToOne
     @JoinColumn(name = "OrdersID")
-    private Order order;
+    @JsonIgnore
+    private Order orders;
 
     @Id
     @ManyToOne
@@ -31,7 +37,7 @@ public class OrderItem {
     private Double unitPrice;
 
     @Column(name = "Quantity")
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "Status")
     private String status;

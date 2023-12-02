@@ -1,30 +1,97 @@
-<div class="margin-10">
+<div class="margin-20">
     <mat-card>
-        <mat-card-title>
+        <mat-card-header>
             <div>
                 <h3>Order Details</h3>
             </div>
-        </mat-card-title>
+        </mat-card-header>
 
         <mat-card-content>
             <mat-table [dataSource]="dataSource">
-                <ng-container matColumnDef="Name">
-                    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let order" data-label="Name">{{order.name}}</mat-cell>
-                </ng-container>
-
                 <ng-container matColumnDef="Date">
                     <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-                    <mat-cell *matCellDef="let order" data-label="Date">{{order.ordersDate  | date:"MMM dd, yyyy"}}
+                    <mat-cell *matCellDef="let order" data-label="Date">{{order.ordersDate | date:"MMM dd, yyyy"}}
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="Price">
                     <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-                    <mat-cell *matCellDef="let order" data-label="Price">{{(order.totalPrice|| 0).toFixed(2) | currency}}</mat-cell>
+                    <mat-cell *matCellDef="let order" data-label="Price">{{(order.totalPrice|| 0).toFixed(2) |
+                        currency}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Prescription">
+                    <mat-header-cell *matHeaderCellDef>Prescription</mat-header-cell>
+                    <mat-cell *matCellDef="let order" data-label="Prescription">
+                        <mat-icon class="pointer" color="primary"
+                            (click)="viewPrescription(order?.prescription)">description</mat-icon>
+                    </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </mat-card-content>
+        <mat-card-footer></mat-card-footer>
+    </mat-card>
+</div>
+<div class="margin-20">
+    <mat-card>
+        <mat-card-header>
+            <div>
+                <h3>Order Items</h3>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-table [dataSource]="itemsDataSource">
+                <ng-container matColumnDef="Product">
+                    <mat-header-cell *matHeaderCellDef>Product</mat-header-cell>
+                    <mat-cell *matCellDef="let item">{{item?.product?.name}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Quantity">
+                    <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+                    <mat-cell *matCellDef="let item">
+                        {{item?.quantity}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Unit Price">
+                    <mat-header-cell *matHeaderCellDef>Unit price</mat-header-cell>
+                    <mat-cell *matCellDef="let item">{{item?.unitPrice}} | currency</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Shipping Date">
+                    <mat-header-cell *matHeaderCellDef>Shipping Date</mat-header-cell>
+                    <mat-cell *matCellDef="let item">{{item?.shippingDate | date: 'medium'}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Shipper">
+                    <mat-header-cell *matHeaderCellDef>Shipper</mat-header-cell>
+                    <mat-cell *matCellDef="let item">{{item?.shipper}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Status">
+                    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let item" data-label="Status">{{item.status}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let item" data-label="Actions">
+                        <button *ngIf="item.status === 'placed'" mat-raised-button color="primary" (click)="updateOrder(item, 'waitingForDispatch')">
+                            Pack order
+                        </button>
+                        <button *ngIf="item.status === 'waitingForDispatch'"mat-raised-button color="primary" (click)="updateOrder(item, 'dispatched')">
+                            Dispatch
+                        </button>
+                        <button *ngIf="item.status === 'dispatched'" mat-raised-button color="primary" (click)="updateOrder(item, 'shipped')">
+                            Ship order
+                        </button>
+                        <button *ngIf="item.status === 'shipped'" mat-raised-button color="primary" (click)="updateOrder(item, 'delivered')">
+                            Deliver order
+                        </button>
+                        <p *ngIf="item.status === 'delivered'"> Completed</p>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="itemColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: itemColumns;"></mat-row>
             </mat-table>
         </mat-card-content>
     </mat-card>
