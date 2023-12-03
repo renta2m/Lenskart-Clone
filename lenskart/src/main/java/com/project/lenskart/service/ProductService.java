@@ -3,6 +3,7 @@ package com.project.lenskart.service;
 import java.util.List;
 
 import com.project.lenskart.dto.ProductDTO;
+import com.project.lenskart.dto.ReviewDTO;
 
 public interface ProductService {
 
@@ -13,4 +14,7 @@ public interface ProductService {
     ProductDTO deleteById(Integer id);
 
     ProductDTO getById(Integer id) throws Exception;
+
+    ReviewDTO saveReview(ReviewDTO reviewDTO);
+    List<ReviewDTO> getReviewsByProductId(Integer id);
 }

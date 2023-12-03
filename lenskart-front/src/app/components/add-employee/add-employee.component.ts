@@ -23,7 +23,7 @@ export class AddEmployeeComponent implements OnInit{
     phoneNumber: ['', [Validators.required]],
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
-    active: ['ACTIVE', Validators.required],
+    status: ['ACTIVE', Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
@@ -40,7 +40,7 @@ export class AddEmployeeComponent implements OnInit{
             this.updateFormContent(this.employee);
           }),
           error: (err: HttpErrorResponse) => {
-            console.log(err.error.message);
+            this.utilService.error(err.error.message, 'ok');
           }
         });
       }
@@ -55,7 +55,7 @@ export class AddEmployeeComponent implements OnInit{
     employee.designation = this.employeeForm.get('designation')?.value || '';
     employee.phoneNumber = this.employeeForm.get('phoneNumber')?.value?.toString() || '';
     employee.email = this.employeeForm.get('email')?.value || '';
-    employee.activeYN = this.employeeForm.get('active')?.value || "";
+    employee.activeYN = this.employeeForm.get('status')?.value || "";
     employee.password = this.employeeForm.get('password')?.value || '';
 
     if (this.employee?.employeeID) {
@@ -85,7 +85,7 @@ export class AddEmployeeComponent implements OnInit{
     this.employeeForm.get('lastName')?.setValue(employee.lastName!);
     this.employeeForm.get('designation')?.setValue(employee.designation!);
     this.employeeForm.get('email')?.setValue(employee.email!);
-    this.employeeForm.get('active')?.setValue(employee.activeYN!);
+    this.employeeForm.get('status')?.setValue(employee.activeYN!);
     this.employeeForm.get('phoneNumber')?.setValue(employee.phoneNumber!);
 
     this.employeeForm.get('password')?.setValue(employee?.password!);

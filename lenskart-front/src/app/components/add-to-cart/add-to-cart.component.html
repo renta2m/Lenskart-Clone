@@ -12,7 +12,7 @@
                         <h3><strong>{{ item.value.product.name }}</strong></h3>
                         <p>Price: ${{ item.value.product.price }} <br> Quantity: {{ item.value.quantity }} <br>
                             Subtotal: ${{
-                            item.value.product.price! * item.value.quantity!}}</p>
+                            (item.value.product.price! * item.value.quantity!).toFixed(2)}}</p>
                     </div>
                 </div>
                 <div fxFlex="35%" fxLayoutAlign="end center">

@@ -1,0 +1,41 @@
+<div class="margin-10">
+    <div>
+        <h3><strong>REVIEWS INFORMATION</strong></h3>
+    </div>
+    <div>
+        <mat-table [dataSource]="reviewDataSource">
+            
+
+            <ng-container matColumnDef="Customer">
+                <mat-header-cell *matHeaderCellDef>Customer</mat-header-cell>
+                <mat-cell *matCellDef="let review" data-label="Customer">{{review.customer.firstName + ' ' + review.customer.lastName}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Posted">
+                <mat-header-cell *matHeaderCellDef>Date Posted</mat-header-cell>
+                <mat-cell *matCellDef="let review" data-label="Date Posted">{{review.datePosted | date}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Rating">
+                <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
+                <mat-cell *matCellDef="let review" data-label="Rating">{{review.rating}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Review">
+                <mat-header-cell *matHeaderCellDef>Review</mat-header-cell>
+                <mat-cell *matCellDef="let review" data-label="Review">{{review.review}}</mat-cell>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="Status">
+                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                <mat-cell *matCellDef="let review" data-label="Status">{{review.status}}</mat-cell>
+            </ng-container> -->
+
+            <mat-header-row *matHeaderRowDef="reviewDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: reviewDisplayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>

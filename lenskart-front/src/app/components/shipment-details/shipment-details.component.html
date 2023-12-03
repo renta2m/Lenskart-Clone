@@ -1,1 +1,44 @@
-<p>shipment-details works!</p>
+<div class="align" fxLayout="column">
+    <mat-card-content>
+        <mat-card-title>
+            <h4 class="align">
+                <strong>Shipment Details</strong>
+            </h4>
+        </mat-card-title>
+        <div *ngIf="data">
+            <!-- Assuming data is the product information, adjust as needed -->
+            <p>Product Name: {{ data.product?.name }}</p>
+            <p>Brand: {{ data.product?.brand }}</p>
+        </div>
+
+        <form [formGroup]="shipmentForm">
+            <div class="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Shipping Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="shippingDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="shipmentForm.get('shippingDate')?.hasError('required')">Shipping Date is
+                        required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Shipper</mat-label>
+                    <mat-select formControlName="shipper" required>
+                        <mat-option value="UPS">UPS</mat-option>
+                        <mat-option value="FedEx">FedEx</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="shipmentForm.get('shipper')?.hasError('required')">Shipper is required</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+
+    <mat-card-content>
+        <div class="align" fxLayout="row" fxLayoutGap=30px>
+            <button mat-button (click)="cancel()">Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="!shipmentForm.valid"
+                (click)="submit()">Submit</button>
+        </div>
+    </mat-card-content>
+</div>

@@ -12,4 +12,5 @@ public interface OrderService {
     void updateOrderItem(OrderItemDTO orderItemDTO) throws Exception;
 
     OrderDTO getById(Integer id) throws Exception;
+    List<OrderDTO> getByCustomerId(Integer id) throws Exception;
 }

@@ -46,7 +46,7 @@ export class AddProductComponent implements OnInit {
             this.updateFormContent(this.product);
           }),
           error: (err: HttpErrorResponse) => {
-            console.log(err.error.message);
+            this.utilService.error(err.error.message, 'ok');
           }
         });
       }

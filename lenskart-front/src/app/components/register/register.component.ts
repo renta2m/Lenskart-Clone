@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
             this.updateFormContent(this.customer);
           }),
           error: (err: HttpErrorResponse) => {
-            console.log(err.error.message);
+            this.utilService.error(err.error.message, 'ok');
           }
         });
       }

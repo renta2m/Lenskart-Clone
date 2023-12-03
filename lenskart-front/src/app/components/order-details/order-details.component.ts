@@ -8,6 +8,11 @@ import { UserService } from 'src/app/services/user.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { PrescriptionComponent } from '../prescription/prescription.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ReviewComponent } from '../review/review.component';
+import { Product } from 'src/app/models/product.model';
+import { ReviewService } from 'src/app/services/review.service';
+import { Review } from 'src/app/models/review.model';
+import { ShipmentDetailsComponent } from '../shipment-details/shipment-details.component';
 
 @Component({
   selector: 'app-order-details',
@@ -21,11 +26,10 @@ export class OrderDetailsComponent implements OnInit {
   order?: Order;
   displayedColumns: string[] = ['Date', 'Price', 'Prescription'];
   itemColumns: string[] = ['Product', 'Quantity', 'Unit Price', 'Status', 'Shipper', 'Shipping Date', 'Actions'];
-  custItemColumns: string[] = ['Product', 'Quantity', 'Unit Price', 'Status', 'Shipper', 'Shipping Date'];
 
   constructor(public utilService: UtilityService, public userService: UserService,
     private route: ActivatedRoute, private orderService: OrderService, private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -34,7 +38,7 @@ export class OrderDetailsComponent implements OnInit {
         // api call to get doctor by user id
         this.orderService.getOrderById(Number(this.id)).subscribe({
           next: ((response: Order) => {
-            this.setOrderValues(response);    
+            this.setOrderValues(response);
           }),
           error: (err: HttpErrorResponse) => {
             this.utilService.error(err.error.message, 'ok');
@@ -45,41 +49,82 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   setOrderValues(order: Order) {
-    let status = '';
+    let statuses: string[] = [];
     order.totalPrice = 0;
     order.orderItems?.forEach((item) => {
       order.totalPrice = order.totalPrice! + (item.quantity! * item?.unitPrice!);
-      if (item.status === 'waitingForDispatch') {
-        status = item.status!;
-      } else if (item.status === 'dispatched' &&  status !== 'waitingForDispatch') {
-        status = item.status!;
-      } else if (item.status === 'shipped' && status !== 'dispatched' &&  status !== 'waitingForDispatch') {
-        status = item.status!;
-      }
+      statuses.push(item.status!);
     });
 
-    if (status === 'waitingForDispatch') {
-      order.status ='Waiting for some items to dispatch';
-    } else if (status === 'dispatched') {
-      order.status = 'Items have been dispatched';
-    } else if (status === 'shipped') {
-      order.status = 'Items have been shipped';
-    }  
+    if (statuses.indexOf('placed') > -1) {
+      order.status = 'items are being packed';
+    } else if (statuses.indexOf('waitingForDispatch') > -1) {
+      order.status = 'Waiting for some items to dispatch';
+    } else if (statuses.indexOf('dispatched') > -1) {
+      order.status = 'waiting for some items to be shipped';
+    } else if (statuses.indexOf('shipped') > -1) {
+      order.status = 'Items have be shipped';
+    } else if (statuses.indexOf('delivered') > -1) {
+      order.status = 'Items have been delivered';
+    }
+
     this.order = order;
-    this.dataSource = [this.order];  
+    this.dataSource = [this.order];
     this.itemsDataSource = this.order?.orderItems;
   }
 
   viewPrescription(prescription: Prescription): void {
     this.dialog.open(PrescriptionComponent, {
       width: '25%',
-      data: {prescription, edit: false},
+      data: { prescription, edit: false },
+    });
+  }
+
+  addReview(product: Product) {
+    const dialogRef = this.dialog.open(ReviewComponent, {
+      width: '25%',
+      data: product
+    });
+
+    dialogRef?.afterClosed().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+
+      this.reviewService.saveReview(result).subscribe({
+        next: ((response: Review) => {
+          this.utilService.success('review added', 'ok');
+        }),
+        error: (err: HttpErrorResponse) => {
+          this.utilService.error(err.error.message, 'ok');
+        }
+      });
     });
   }
 
   updateOrder(item: OrderItem, status: string) {
-    item.status = status;
-    item.orderId = this.order?.id;
+    if (status === 'shipped') {
+      const dialogRef = this.dialog.open(ShipmentDetailsComponent, {
+        width: '25%',
+        data: item,
+      });
+
+      dialogRef?.afterClosed().subscribe((result) => {
+        if (!result) {
+          return;
+        }
+        result.status = status;
+        result.orderId = this.order?.id;
+        this.updateStatus(result);
+      });
+    } else {
+      item.status = status;
+      item.orderId = this.order?.id;
+      this.updateStatus(item);
+    }
+  }
+
+  updateStatus(item: OrderItem) {
     this.orderService.updateStatus(item).subscribe({
       next: ((response: void) => {
         this.utilService.refreshPage(this.router, this.route);

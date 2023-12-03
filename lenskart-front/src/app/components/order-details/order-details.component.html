@@ -16,7 +16,7 @@
 
                 <ng-container matColumnDef="Price">
                     <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-                    <mat-cell *matCellDef="let order" data-label="Price">{{(order.totalPrice|| 0).toFixed(2) |
+                    <mat-cell *matCellDef="let order" data-label="Price">{{order.totalPrice|| 0 |
                         currency}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="Prescription">
@@ -55,11 +55,12 @@
                 </ng-container>
                 <ng-container matColumnDef="Unit Price">
                     <mat-header-cell *matHeaderCellDef>Unit price</mat-header-cell>
-                    <mat-cell *matCellDef="let item">{{item?.unitPrice}} | currency</mat-cell>
+                    <mat-cell *matCellDef="let item">{{item?.unitPrice | currency}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="Shipping Date">
                     <mat-header-cell *matHeaderCellDef>Shipping Date</mat-header-cell>
-                    <mat-cell *matCellDef="let item">{{item?.shippingDate ? (item?.shippingDate | date: 'medium') : 'N/A'}}
+                    <mat-cell *matCellDef="let item">{{item?.shippingDate ? (item?.shippingDate | date: 'medium') :
+                        'N/A'}}
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="Shipper">
@@ -69,7 +70,7 @@
                 </ng-container>
                 <ng-container matColumnDef="Status">
                     <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-                    <mat-cell *matCellDef="let item" data-label="Status">{{item.status}}</mat-cell>
+                    <mat-cell *matCellDef="let item" data-label="Status">{{item.status === 'waitingForDispatch' ? 'Waiting For Dispatch' : item.status}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="Actions">
@@ -94,16 +95,17 @@
                             </button>
                             <p *ngIf="item.status === 'delivered'"> Completed</p>
                         </div>
+                        <div *ngIf="userService.isCustomerLoggedIn()">
+                            <button *ngIf="item.status === 'delivered'" mat-raised-button color="primary"
+                                (click)="addReview(item.product)">
+                                Add Review
+                            </button>
+                            <div *ngIf="item.status !== 'delivered'"> review after delivery</div>
+                        </div>
                     </mat-cell>
                 </ng-container>
-                <div *ngIf="userService.isCustomerLoggedIn()">
-                    <mat-header-row *matHeaderRowDef="custItemColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: custItemColumns;"></mat-row>
-                </div>
-                <div *ngIf="!userService.isCustomerLoggedIn()">
-                    <mat-header-row *matHeaderRowDef="itemColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: itemColumns;"></mat-row>
-                </div>
+                <mat-header-row *matHeaderRowDef="itemColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: itemColumns;"></mat-row>
             </mat-table>
         </mat-card-content>
     </mat-card>

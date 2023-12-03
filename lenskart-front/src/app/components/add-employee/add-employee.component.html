@@ -1,8 +1,11 @@
 <div class='margin-top-30 align'>
     <mat-card>
         <mat-card-title>
-            <h4 class="align">
+            <h4 class="align" *ngIf="!employee?.employeeID">
                 Add New Employee
+            </h4>
+            <h4 class="align" *ngIf="employee?.employeeID">
+                Edit Employee
             </h4>
         </mat-card-title>
         <mat-card-content>
@@ -29,7 +32,18 @@
                                 </span>
                             </mat-error>
                         </mat-form-field>
-
+                        <mat-form-field appearance="outline">
+                            <mat-label>Designation</mat-label>
+                            <mat-select placeholder="Designation" required formControlName="designation">
+                                <mat-option value="manager">Manager</mat-option>
+                                <mat-option value="employee">Employee</mat-option>
+                            </mat-select>
+                            <mat-error>
+                                <span *ngIf="employeeForm.get('designation')?.hasError('required')">
+                                    Designation is <strong>Required</strong>
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
                         <mat-form-field appearance="outline">
                             <mat-label>Email</mat-label>
                             <input matInput placeholder="Email" type="email" formControlName="email">
@@ -76,19 +90,27 @@
                                 Confirm your <strong>Password</strong>
                             </mat-error>
                         </mat-form-field>
+                        <mat-form-field appearance="outline" *ngIf="employee?.employeeID">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+                                <mat-option value="ACTIVE">ACTIVE</mat-option>
+                                <mat-option value="INACTIVE">INACTIVE</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                 </div><br>
             </form>
         </mat-card-content>
         <mat-card-content>
             <div class="align">
-            <button mat-raised-button (click)="utilService.back()" color="primary">Back
-            </button>
-            <span style="margin:17px;"></span>
+                <button mat-raised-button (click)="utilService.back()" color="primary">Back
+                </button>
+                <span style="margin:17px;"></span>
 
-            <button mat-raised-button (click)="saveEmployee()" color="primary" [disabled]="employeeForm.invalid">Save
-                Employee
-            </button>
+                <button mat-raised-button (click)="saveEmployee()" color="primary"
+                    [disabled]="employeeForm.invalid">Save
+                    Employee
+                </button>
             </div>
         </mat-card-content>
     </mat-card>

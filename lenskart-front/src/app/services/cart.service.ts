@@ -17,17 +17,14 @@ export class CartService {
   }
 
   private updateLocalStorage(): void {
-    // Update session storage whenever cart items change
     localStorage.setItem('cartItems', JSON.stringify([...this.cartItems]));
   }
 
   addToCart(item: any, quantity: number = 1): Map<number, { product: Product, quantity: number }> {
     if (this.cartItems.has(item.id)) {
-      // If item is already in the cart, update the quantity
       const existingItem = this.cartItems.get(item.id)!;
       existingItem.quantity += quantity;
     } else {
-      // If item is not in the cart, add it with the specified quantity
       this.cartItems.set(item.id, { product: item, quantity: quantity });
     }
 
@@ -40,6 +37,7 @@ export class CartService {
   }
 
   removeFromCart(productId: number): Map<number, { product: Product, quantity: number }> {
+    this.cartItems = this.getCartItems();
     this.cartItems.delete(productId);
     this.updateLocalStorage();
     return this.cartItems;
@@ -52,6 +50,7 @@ export class CartService {
   }
 
   changeQuantity(productId: number, change: number): Map<number, { product: Product, quantity: number }> {
+    this.cartItems = this.getCartItems();
     if (this.cartItems.has(productId)) {
       const item = this.cartItems.get(productId)!;
       item.quantity += change;

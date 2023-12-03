@@ -37,6 +37,11 @@ public class OrderController {
         return orderService.getById(id);
     }
 
+    @GetMapping("/customer/{id}")
+    public List<OrderDTO> getByCustomerId(@PathVariable Integer id) throws Exception {
+        return orderService.getByCustomerId(id);
+    }
+
     @PostMapping("/update-status")
     public void updateStatus(@RequestBody OrderItemDTO orderItemDTO) throws Exception {
         orderService.updateOrderItem(orderItemDTO);

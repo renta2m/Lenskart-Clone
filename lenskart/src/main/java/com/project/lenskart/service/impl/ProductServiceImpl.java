@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.lenskart.dto.ProductDTO;
+import com.project.lenskart.dto.ReviewDTO;
 import com.project.lenskart.model.Product;
+import com.project.lenskart.model.Review;
 import com.project.lenskart.repository.ProductRepository;
+import com.project.lenskart.repository.ReviewRepository;
 import com.project.lenskart.service.ProductService;
 
 @Service
@@ -20,6 +23,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Override
     public List<ProductDTO> getAll() {
@@ -54,6 +59,26 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return modelMapper.map(product.get(), ProductDTO.class);
+    }
 
+    @Override
+    public ReviewDTO saveReview(ReviewDTO reviewDTO) {
+        Review review = modelMapper.map(reviewDTO, Review.class);
+        reviewRepository.save(review);
+
+        return modelMapper.map(review, ReviewDTO.class);
+    }
+
+
+    @Override
+    public List<ReviewDTO> getReviewsByProductId(Integer id) {
+        List<Review> reviews = reviewRepository.findByProductId(id);
+        List<ReviewDTO> reviewDTOS = new ArrayList<>();
+
+        reviews.forEach(review -> {
+            reviewDTOS.add(modelMapper.map(review, ReviewDTO.class));
+        });
+
+        return reviewDTOS;
     }
 }

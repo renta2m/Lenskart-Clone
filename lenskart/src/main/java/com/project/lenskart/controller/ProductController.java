@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.lenskart.dto.ProductDTO;
+import com.project.lenskart.dto.ReviewDTO;
 import com.project.lenskart.service.ProductService;
 
 @RestController
@@ -35,6 +36,16 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductDTO getById(@PathVariable Integer id) throws Exception {
         return productService.getById(id);
+    }
+
+    @PostMapping("/review")
+    public ReviewDTO save(@RequestBody ReviewDTO reviewDTO) {
+        return productService.saveReview(reviewDTO);
+    }
+
+    @GetMapping("/review/{prodId}")
+    public List<ReviewDTO> save(@PathVariable Integer prodId) {
+        return productService.getReviewsByProductId(prodId);
     }
 
     @DeleteMapping("/{id}")

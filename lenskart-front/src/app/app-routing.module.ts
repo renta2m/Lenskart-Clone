@@ -13,6 +13,7 @@ import { UserService } from './services/user.service';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { WarehouseComponent } from './components/warehouse/warehouse.component';
 
 const routes: Routes = [
   { path: '', redirectTo: "/home", pathMatch: "full" },
@@ -24,13 +25,15 @@ const routes: Routes = [
   { path:'add-employee', component: AddEmployeeComponent, canActivate: [UserService] },
   { path:'edit-customer/:custId', component: RegisterComponent, canActivate: [UserService] },
   { path:'your-profile/:custId', component: RegisterComponent, canActivate: [UserService] },
-  { path:'edit-product/:prodId', component: AddProductComponent, canActivate: [UserService] },
+  { path:'edit-product/:productId', component: AddProductComponent, canActivate: [UserService] },
   { path:'edit-employee/:empId', component: AddEmployeeComponent, canActivate: [UserService] },
   { path:'order-details/:orderId', component: OrderDetailsComponent, canActivate: [UserService] },
+  { path:'your-orders', component: OrderListComponent, canActivate: [UserService] },
   { path:'products', component: ProductListComponent, canActivate: [UserService] },
   { path:'employees', component: EmployeeListComponent, canActivate: [UserService] },
   { path:'customers', component: CustomerListComponent, canActivate: [UserService] },
   { path:'orders', component: OrderListComponent, canActivate: [UserService] },
+  { path:'warehouses', component: WarehouseComponent, canActivate: [UserService] },
   { path:'cart', component: AddToCartComponent },
   { path:'checkout', component: CheckoutComponent, canActivate: [UserService]}
 ];

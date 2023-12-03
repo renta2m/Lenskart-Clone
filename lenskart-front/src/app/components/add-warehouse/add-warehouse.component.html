@@ -1,0 +1,73 @@
+<div class="margin-top-30 align">
+    <mat-card>
+        <mat-card-title>
+            <h4 class="align" *ngIf="!warehouse?.id">
+                Add New Warehouse
+            </h4>
+            <h4 class="align" *ngIf="warehouse?.id">
+                Edit Warehouse
+            </h4>
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="warehouseForm">
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apartment No</mat-label>
+                            <input matInput placeholder="Apartment No" type="text" formControlName="apartmentNo">
+                            <mat-error *ngIf="warehouseForm.get('apartmentNo')?.hasError('required')">
+                                Apartment No is <strong>Required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Street Name</mat-label>
+                            <input matInput placeholder="Street Name" type="text" formControlName="streetName">
+                            <mat-error *ngIf="warehouseForm.get('streetName')?.hasError('required')">
+                                Street Name is <strong>Required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput placeholder="City" type="text" formControlName="city">
+                            <mat-error *ngIf="warehouseForm.get('city')?.hasError('required')">
+                                City is <strong>Required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="column margin-left-30">
+                        <mat-form-field appearance="outline">
+                            <mat-label>State</mat-label>
+                            <input matInput placeholder="State" type="text" formControlName="state">
+                            <mat-error *ngIf="warehouseForm.get('state')?.hasError('required')">
+                                State is <strong>Required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Zipcode</mat-label>
+                            <input matInput placeholder="Zipcode" type="text" formControlName="zipcode">
+                            <mat-error *ngIf="warehouseForm.get('zipcode')?.hasError('required')">
+                                Zipcode is <strong>Required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" *ngIf="warehouse?.id">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+                                <mat-option value="ACTIVE">ACTIVE</mat-option>
+                                <mat-option value="INACTIVE">INACTIVE</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div><br>
+            </form>
+        </mat-card-content>
+        <mat-card-content>
+            <div class="align">
+                <button mat-raised-button (click)="onNoClick()" color="primary">Close
+                </button>
+                <span style="margin:17px;"></span>
+                <button mat-raised-button (click)="saveWarehouse()" color="primary"
+                    [disabled]="warehouseForm.invalid">Save Warehouse</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

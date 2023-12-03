@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     const role = localStorage.getItem('role');
     if (role === 'customer') {
       this.router.navigate([`/home`], { relativeTo: this.activatedRoute });
-    } else if (role === 'acoountant') {
+    } else if (role === 'employee') {
       this.router.navigate([`/orders`], { relativeTo: this.activatedRoute });
     } else if (role === 'manager') {
       this.router.navigate([`/employees`], { relativeTo: this.activatedRoute });

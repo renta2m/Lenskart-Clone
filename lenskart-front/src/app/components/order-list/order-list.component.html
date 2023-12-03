@@ -10,24 +10,27 @@
 
         <ng-container matColumnDef="Name">
             <mat-header-cell *matHeaderCellDef>Customer Name</mat-header-cell>
-            <mat-cell *matCellDef="let order" data-label="Name">{{order?.customer?.firstName + order?.customer?.lastName}}</mat-cell>
+            <mat-cell *matCellDef="let order" data-label="Name">{{order?.customer?.firstName +
+                order?.customer?.lastName}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Price">
             <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-            <mat-cell *matCellDef="let order" data-label="Price">{{(order.totalPrice|| 0).toFixed(2) | currency}}</mat-cell>
+            <mat-cell *matCellDef="let order" data-label="Price">{{order.totalPrice|| 0 |
+                currency}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Prescription">
             <mat-header-cell *matHeaderCellDef>Prescription</mat-header-cell>
             <mat-cell *matCellDef="let order" data-label="Prescription">
-                <mat-icon class="pointer" color="primary" (click)="viewPrescription(order?.prescription)">description</mat-icon>
+                <mat-icon class="pointer" color="primary"
+                    (click)="viewPrescription(order?.prescription)">description</mat-icon>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Date">
             <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
-            <mat-cell *matCellDef="let order" data-label="Date">{{order.ordersDate  | date:"MMM dd, yyyy" }}</mat-cell>
+            <mat-cell *matCellDef="let order" data-label="Date">{{order.ordersDate | date:"MMM dd, yyyy" }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Status">
@@ -39,7 +42,9 @@
             <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
             <mat-cell *matCellDef="let order" data-label="Actions">
                 <div class="row">
-                    <button mat-raised-button (click)="viewOrder(order.id)" color="primary">Update
+                    <button mat-flat-button (click)="viewOrder(order.id)" color="primary">
+                        <div *ngIf="!isCustomer">Update</div>
+                        <div *ngIf="isCustomer">View Order</div>
                     </button>
                 </div>
             </mat-cell>
@@ -48,4 +53,6 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <mat-paginator [pageSizeOptions]="[10,20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
 </div>

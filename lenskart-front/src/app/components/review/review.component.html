@@ -1,0 +1,40 @@
+<div class='align' fxLayout="column">
+        <mat-card-content>
+            <mat-card-title>
+                <h4 class="align">
+                    <strong>Product Review</strong>
+                </h4>
+            </mat-card-title>
+            <div *ngIf="data">
+                <p>Product Name: {{ data.name }}</p>
+                <p>Brand: {{ data.brand }}</p>
+            </div>
+
+            <form [formGroup]="ratingForm">
+                <div class="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Rating (out of 5)</mat-label>
+                        <input matInput type="number" formControlName="rating" min="1" max="5" required>
+                        <mat-error *ngIf="ratingForm.get('rating')?.hasError('required')">Rating is required</mat-error>
+                        <mat-error
+                            *ngIf="ratingForm.get('rating')?.hasError('min') || ratingForm.get('rating')?.hasError('max')">
+                            Rating must be between 1 and 5
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Review</mat-label>
+                        <textarea matInput formControlName="review" required></textarea>
+                        <mat-error *ngIf="ratingForm.get('review')?.hasError('required')">Review is required</mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-content>
+            <div class="align" fxLayout="row" fxLayoutGap=30px>
+                <button mat-button (click)="cancel()">Cancel</button>
+                <button mat-raised-button color="primary" [disabled]="!ratingForm.valid"
+                    (click)="submit()">Submit</button>
+            </div>
+        </mat-card-content>
+</div>

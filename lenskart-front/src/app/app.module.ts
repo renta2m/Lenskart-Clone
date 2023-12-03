@@ -33,10 +33,15 @@ import { PrescriptionComponent } from './components/prescription/prescription.co
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CartService } from './services/cart.service';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AddressComponent } from './components/address/address.component';
 import { ShipmentDetailsComponent } from './components/shipment-details/shipment-details.component';
+import { ReviewComponent } from './components/review/review.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { WarehouseComponent } from './components/warehouse/warehouse.component';
+import { AddWarehouseComponent } from './components/add-warehouse/add-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +61,10 @@ import { ShipmentDetailsComponent } from './components/shipment-details/shipment
     CheckoutComponent,
     AddressComponent,
     ShipmentDetailsComponent,
+    ReviewComponent,
+    ReviewsComponent,
+    WarehouseComponent,
+    AddWarehouseComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,9 +88,11 @@ import { ShipmentDetailsComponent } from './components/shipment-details/shipment
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [MatSnackBar],
+  providers: [MatSnackBar, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

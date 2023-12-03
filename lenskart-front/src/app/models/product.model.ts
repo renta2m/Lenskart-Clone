@@ -1,3 +1,5 @@
+import { Review } from "./review.model";
+
 export interface Product {
     id?: number;
     name?: string;
@@ -11,8 +13,4 @@ export interface Product {
     frameType?: string;
     reviews?: Review[];
     imagePath?: string;
-}
-
-export interface Review {
-    
 }

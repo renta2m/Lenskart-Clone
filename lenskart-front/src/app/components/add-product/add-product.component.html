@@ -1,8 +1,11 @@
 <div class='margin-top-30 align'>
     <mat-card>
         <mat-card-title>
-            <h4 class="align">
+            <h4 class="align" *ngIf="!product?.id">
                 Create Product
+            </h4>
+            <h4 class="align" *ngIf="product?.id">
+                Edit Product
             </h4>
         </mat-card-title>
         <mat-card-content>
@@ -33,17 +36,17 @@
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                            <mat-label>Details</mat-label>
-                            <textarea matInput placeholder="Details" type="text" formControlName="details"></textarea>
-                            <mat-error *ngIf="productForm.get('details')?.hasError('required')">
-                                Details are <strong>Required</strong>
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline">
                             <mat-label>Price</mat-label>
                             <input matInput placeholder="price" type="number" formControlName="price">
                             <mat-error *ngIf="productForm.get('price')?.hasError('required')">
                                 Price is <strong>Required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Details</mat-label>
+                            <textarea matInput placeholder="Details" type="text" formControlName="details"></textarea>
+                            <mat-error *ngIf="productForm.get('details')?.hasError('required')">
+                                Details are <strong>Required</strong>
                             </mat-error>
                         </mat-form-field>
                     </div>

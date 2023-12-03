@@ -9,6 +9,7 @@ import { PrescriptionComponent } from '../prescription/prescription.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AddressComponent } from '../address/address.component';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-checkout',
@@ -29,7 +30,7 @@ export class CheckoutComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private orderService: OrderService, private cartService: CartService,
-    private dialog: MatDialog, private router: Router) {
+    private dialog: MatDialog, private router: Router, private utilService: UtilityService) {
   }
 
   ngOnInit(): void {
@@ -72,7 +73,7 @@ export class CheckoutComponent implements OnInit {
         this.router.navigate([`order-details/${respose.id}`]);
       }),
       error: (err: HttpErrorResponse) => {
-        console.log(err.error.message);
+        this.utilService.error(err.error.message, 'ok');
       }
     });
   }

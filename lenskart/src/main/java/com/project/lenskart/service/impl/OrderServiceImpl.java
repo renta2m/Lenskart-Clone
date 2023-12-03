@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderItemRepository orderItemRepository;
     @Autowired
     private ModelMapper modelMapper;
+
     @Override
     public List<OrderDTO> getAll() {
         Iterable<Order> iterable = orderRepository.findAll();
@@ -74,5 +76,16 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return modelMapper.map(orderEntity.get(), OrderDTO.class);
+    }
+
+    @Override
+    public List<OrderDTO> getByCustomerId(Integer id) throws Exception {
+        List<Order> iterable = orderRepository.findByCustomerId(id);
+        List<OrderDTO> orders = new ArrayList<>();
+
+        iterable.forEach(order -> {
+            orders.add(modelMapper.map(order, OrderDTO.class));
+        });
+        return orders;
     }
 }

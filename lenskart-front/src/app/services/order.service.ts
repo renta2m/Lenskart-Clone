@@ -19,6 +19,9 @@ export class OrderService {
     return this.http.get<Order>(this.API_URL + id);
   }
 
+  public getOrdersByCustomerId(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.API_URL + 'customer/' + Number(localStorage.getItem('id')));
+  }
   public saveOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.API_URL + 'create', order);
   }
