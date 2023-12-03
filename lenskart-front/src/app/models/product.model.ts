@@ -13,4 +13,5 @@ export interface Product {
     frameType?: string;
     reviews?: Review[];
     imagePath?: string;
+    
 }

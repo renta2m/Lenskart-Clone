@@ -14,7 +14,10 @@
         </div>
         <div fxLayout="column" fxLayoutGap="8px">
           <button mat-flat-button color="accent" (click)="addToCart(product)">Add to Cart</button>
-          <button mat-flat-button color="primary" (click)="buyNow(product)">Buy Now</button>
+          <!-- <button mat-flat-button color="primary" (click)="buyNow(product)">Buy Now</button> -->
+          <button mat-flat-button (click)="viewReviews(product.id!)"
+                        color="primary"> Reviews
+                    </button>
         </div>
       </div>
     </a>

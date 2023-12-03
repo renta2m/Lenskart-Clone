@@ -3,6 +3,8 @@ import { Route, Router } from '@angular/router';
 import { Order, OrderItem } from 'src/app/models/order.model';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
+import { ReviewsComponent } from '../reviews/reviews.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-products',
@@ -22,8 +24,9 @@ export class ProductsComponent implements OnInit {
       price: 20
     }
   ];
+  
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private router: Router,private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((products) => {
@@ -64,5 +67,11 @@ export class ProductsComponent implements OnInit {
     }
 
     localStorage.setItem('cartItems', JSON.stringify([...cartItems]));
+  }
+  viewReviews(id:number): void {
+    this.dialog.open(ReviewsComponent, {
+      width: '75%',
+      data: id,
+    });
   }
 }
