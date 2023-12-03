@@ -28,10 +28,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getAll() {
-        Iterable<Product> iterable = productRepository.findAll();
+        List<Product> list = productRepository.findAllByOrderByIdDesc();
         List<ProductDTO> products = new ArrayList<>();
 
-        iterable.forEach(product -> {
+        list.forEach(product -> {
             products.add(modelMapper.map(product, ProductDTO.class));
         });
         return products;
@@ -79,6 +79,9 @@ public class ProductServiceImpl implements ProductService {
             reviewDTOS.add(modelMapper.map(review, ReviewDTO.class));
         });
 
+        reviewDTOS.sort((a, b) -> {
+            return b.getId().compareTo(a.getId());
+        });
         return reviewDTOS;
     }
 }

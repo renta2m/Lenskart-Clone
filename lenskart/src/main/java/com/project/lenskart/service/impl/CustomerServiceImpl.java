@@ -22,10 +22,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDTO> getAll() {
-        Iterable<Customer> iterable = customerRepository.findAll();
+        List<Customer> list = customerRepository.findAllByOrderByIdDesc();
         List<CustomerDTO> customers = new ArrayList<>();
 
-        iterable.forEach(Customer -> {
+        list.forEach(Customer -> {
             customers.add(modelMapper.map(Customer, CustomerDTO.class));
         });
         return customers;

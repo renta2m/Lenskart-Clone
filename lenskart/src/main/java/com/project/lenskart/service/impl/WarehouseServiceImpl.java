@@ -27,10 +27,10 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public List<WarehouseDTO> getAll() {
-        Iterable<Warehouse> iterable = warehouseRepository.findAll();
+        List<Warehouse> list = warehouseRepository.findAllByOrderByIdDesc();
         List<WarehouseDTO> warehouses = new ArrayList<>();
 
-        iterable.forEach(warehouse -> {
+        list.forEach(warehouse -> {
             warehouses.add(modelMapper.map(warehouse, WarehouseDTO.class));
         });
         return warehouses;

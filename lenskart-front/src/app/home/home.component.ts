@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UtilityService } from '../services/utility.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router,
-    public userService: UserService) {
+    public userService: UserService, private utilService: UtilityService) {
   }
 
   ngOnInit(): void {
@@ -38,8 +39,10 @@ export class HomeComponent implements OnInit {
     this.userService.login(this.user! , this.loginType).subscribe({
       next: ((response: User) => {
         if (response === null) {
+          this.utilService.error('wrong details', 'ok');
           this.invalidDetails = true;
         } else {
+          this.utilService.success('login successful', 'ok');
           this.user = response;
           localStorage.setItem('user', response.userId!.toString());
           localStorage.setItem('role', response.designation!);

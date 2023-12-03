@@ -32,13 +32,29 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDTO> getAll() {
-        Iterable<Order> iterable = orderRepository.findAll();
+        List<Order> list = orderRepository.findAllByOrderByIdDesc();
         List<OrderDTO> orders = new ArrayList<>();
 
-        iterable.forEach(order -> {
+        list.forEach(order -> {
             orders.add(modelMapper.map(order, OrderDTO.class));
         });
         return orders;
+    }
+
+    @Override
+    public List<OrderDTO> findByCustomer(Integer id) throws Exception {
+        List<Order> iterable = orderRepository.findByCustomerId(id);
+        List<OrderDTO> orderDTOS = new ArrayList<>();
+
+        iterable.forEach(order -> {
+            orderDTOS.add(modelMapper.map(order, OrderDTO.class));
+        });
+
+        orderDTOS.sort((a, b) -> {
+            return b.getId().compareTo(a.getId());
+        });
+
+        return orderDTOS;
     }
 
     @Override
@@ -76,16 +92,5 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return modelMapper.map(orderEntity.get(), OrderDTO.class);
-    }
-
-    @Override
-    public List<OrderDTO> getByCustomerId(Integer id) throws Exception {
-        List<Order> iterable = orderRepository.findByCustomerId(id);
-        List<OrderDTO> orders = new ArrayList<>();
-
-        iterable.forEach(order -> {
-            orders.add(modelMapper.map(order, OrderDTO.class));
-        });
-        return orders;
     }
 }

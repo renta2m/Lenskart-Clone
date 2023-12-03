@@ -38,8 +38,8 @@ public class OrderController {
     }
 
     @GetMapping("/customer/{id}")
-    public List<OrderDTO> getByCustomerId(@PathVariable Integer id) throws Exception {
-        return orderService.getByCustomerId(id);
+    public List<OrderDTO> findByCustomer(@PathVariable Integer id) throws Exception {
+        return orderService.findByCustomer(id);
     }
 
     @PostMapping("/update-status")

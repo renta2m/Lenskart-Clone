@@ -22,10 +22,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDTO> getAll() {
-        Iterable<Employee> iterable = employeeRepository.findAll();
+        List<Employee> list = employeeRepository.findAllByOrderByEmployeeIDDesc();
         List<EmployeeDTO> employees = new ArrayList<>();
 
-        iterable.forEach(employee -> {
+        list.forEach(employee -> {
             employees.add(modelMapper.map(employee, EmployeeDTO.class));
         });
         return employees;
